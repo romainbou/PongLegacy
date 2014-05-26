@@ -19,11 +19,14 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private SpriteFont scoreFont;
+
 
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -85,6 +88,12 @@ namespace PongLegacy
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+
+            scoreFont = Content.Load<SpriteFont>("ScoreFont");
+
+            spriteBatch.Begin();
+            spriteBatch.DrawString(scoreFont, "Score 0 1 !", new Vector2(10, 20), Color.White);
+            spriteBatch.End();  
 
             base.Draw(gameTime);
         }
