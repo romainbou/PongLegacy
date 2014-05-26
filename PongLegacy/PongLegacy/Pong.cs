@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
+
+
 namespace PongLegacy
 {
     /// <summary>
@@ -21,12 +24,16 @@ namespace PongLegacy
 
         private SpriteFont scoreFont;
 
+        public Vector2 Dimensions { get; set; }//window dimensions
 
+        public State GameState { get; set; }
+        
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
+            GameState = State.MENU;
         }
 
         /// <summary>
@@ -74,7 +81,26 @@ namespace PongLegacy
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            switch (GameState)
+            {
+                case State.MENU:
+                    break;
+
+                case State.START:
+                    break;
+
+                case State.PLAY:
+                    break;
+
+                case State.PAUSE:
+                    break;
+
+                case State.END:
+                    break;
+
+                default:
+                    throw new UnauthorizedAccessException();
+            }
 
             base.Update(gameTime);
         }
@@ -85,9 +111,28 @@ namespace PongLegacy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            switch (GameState)
+            {
+                case State.MENU:
+                    break;
+
+                case State.START:
+                    break;
+
+                case State.PLAY:
+                    break;
+
+                case State.PAUSE:
+                    break;
+
+                case State.END:
+                    break;
+
+                default:
+                    throw new UnauthorizedAccessException();
+            }
 
             scoreFont = Content.Load<SpriteFont>("ScoreFont");
 
