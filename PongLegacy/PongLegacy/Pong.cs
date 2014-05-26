@@ -27,7 +27,7 @@ namespace PongLegacy
         public Vector2 Dimensions { get; set; }//window dimensions
 
         public State GameState { get; set; }
-        
+
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -45,6 +45,9 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            // Initialize the fond for displaying the scores
+            scoreFont = Content.Load<SpriteFont>("ScoreFont");
 
             base.Initialize();
         }
@@ -116,6 +119,10 @@ namespace PongLegacy
             switch (GameState)
             {
                 case State.MENU:
+
+                    // Display game name
+                    drawTitle();
+
                     break;
 
                 case State.START:
@@ -134,13 +141,32 @@ namespace PongLegacy
                     throw new UnauthorizedAccessException();
             }
 
-            scoreFont = Content.Load<SpriteFont>("ScoreFont");
-
-            spriteBatch.Begin();
-            spriteBatch.DrawString(scoreFont, "Score 0 1 !", new Vector2(10, 20), Color.White);
-            spriteBatch.End();  
-
             base.Draw(gameTime);
         }
+
+
+        /*
+         * Menu drawing methods
+        */
+        private void drawTitle()
+        {
+            spriteBatch.Begin();
+            spriteBatch.DrawString(scoreFont, Conf.GAME_NAME, new Vector2(250, 50), Color.White);
+            spriteBatch.End();
+        }
+
+        /*
+         * Play drawing methods
+         * (While the game is running)
+        */
+
+        /*
+         * Pause drawing methods
+        */
+
+        /*
+         * End drawing methods
+        */
+
     }
 }
