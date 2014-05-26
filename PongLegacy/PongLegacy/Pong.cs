@@ -9,6 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
+
+
 namespace PongLegacy
 {
     /// <summary>
@@ -19,7 +22,9 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        public Vector2 Dimensions { get; set; }//window dimensions
 
+        
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
