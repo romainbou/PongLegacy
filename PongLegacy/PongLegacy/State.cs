@@ -5,5 +5,5 @@ using System.Text;
 
 namespace PongLegacy
 {
-    enum State { MENU, START, PLAY, PAUSE, END };
+    public enum State { MENU, START, PLAY, PAUSE, END };
 }
