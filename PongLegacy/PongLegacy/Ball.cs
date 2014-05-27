@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PongLegacy
 {
-    class Ball:SpriteTexture2D
+    public class Ball:SpriteTexture2D
     {
         public int Radius { get; set; }
         public Vector2 Speed { get; set; }

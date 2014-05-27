@@ -24,16 +24,13 @@ namespace PongLegacy
 
         static List<Sprite> ToDraw;
 
-        private SpriteText title;
-        private Player Bat;
-
-        public Vector2 Dimensions { get; set; }//window dimensions
+        //window dimensions
+        public Vector2 Dimensions { get; set; }
 
         public Team LeftTeam { get; set; }
         public Team RightTeam { get; set; }
 
         public Conf.GameState GameState { get; set; }
-
 
         public Pong()
         {
@@ -51,12 +48,7 @@ namespace PongLegacy
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
-            // Initialize the fond for displaying the scores
-            title = new SpriteText(new Vector2(250, 50), Color.White, Conf.GAME_NAME);
-            Bat = new Player(new Vector2(10, 10), 100, new Team());
-
+            // TODO: Initialize (instanciate) Menu, start/play, end
             base.Initialize();
         }
 
@@ -71,11 +63,6 @@ namespace PongLegacy
 
             // Instanciate the Sprite List
             ToDraw = new List<Sprite>();
-            // TODO: use this.Content to load your game content here
-            title.LoadContent(Content, "ScoreFont");
-
-
-            Bat.LoadContent(Content, "bluePixel");
         }
 
         /// <summary>
@@ -101,9 +88,7 @@ namespace PongLegacy
             switch (GameState)
             {
                 case Conf.GameState.MENU:
-
-                    ToDraw.Add(title);
-                    ToDraw.Add(Bat);
+                    // TODO: Menu adds its sprits to toDraw
                     break;
 
                 case Conf.GameState.START:
@@ -142,32 +127,5 @@ namespace PongLegacy
 
             base.Draw(gameTime);
         }
-
-
-        /*
-         * Menu drawing methods
-        */
-        //private void drawTitle()
-        //{
-        //    spriteBatch.DrawString(scoreFont, Conf.GAME_NAME, new Vector2(250, 50), Color.White);
-        //}
-
-        /*
-         * Play drawing methods
-         * (While the game is running)
-        */
-
-        /*
-         * Start drawing methods
-         * /
-
-        /*
-         * Pause drawing methods
-        */
-
-        /*
-         * End drawing methods
-        */
-
     }
 }
