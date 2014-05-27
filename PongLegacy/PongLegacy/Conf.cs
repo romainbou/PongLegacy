@@ -13,8 +13,8 @@ namespace PongLegacy
 
 
         /* ENUMS */
-        public enum GameState { MENU, START, PLAY, PAUSE, END };
-        public enum TeamSide { LEFT, RIGHT };
+        public  enum GameState { MENU, START, PLAY, PAUSE, END };
+        public  enum TeamSide { LEFT, RIGHT };
 
     }
 }
