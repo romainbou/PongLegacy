@@ -22,7 +22,9 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private SpriteFont scoreFont;
+        static List<Sprite> ToDraw;
+
+        private SpriteFont title;
 
         public Vector2 Dimensions { get; set; }//window dimensions
 
@@ -50,7 +52,12 @@ namespace PongLegacy
             // TODO: Add your initialization logic here
 
             // Initialize the fond for displaying the scores
-            scoreFont = Content.Load<SpriteFont>("ScoreFont");
+            title = new SpriteFont();
+            title.position = new Vector2(250, 50);
+            title.LoadContent(Content, "ScoreFont");
+            title.text = Conf.GAME_NAME;
+
+
 
 
             base.Initialize();
@@ -65,6 +72,8 @@ namespace PongLegacy
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // Instanciate the Sprite List
+            ToDraw = new List<Sprite>();
             // TODO: use this.Content to load your game content here
         }
 
@@ -91,6 +100,7 @@ namespace PongLegacy
             switch (GameState)
             {
                 case Conf.GameState.MENU:
+                    ToDraw.Add(title);
                     break;
 
                 case Conf.GameState.START:
@@ -120,30 +130,12 @@ namespace PongLegacy
         {
             GraphicsDevice.Clear(Color.Black);
 
-            switch (GameState)
+            spriteBatch.Begin();
+            foreach (SpriteTexture2D Element in ToDraw)
             {
-                case Conf.GameState.MENU:
-
-                    // Display game name
-                    drawTitle();
-
-                    break;
-
-                case Conf.GameState.START:
-                    break;
-
-                case Conf.GameState.PLAY:
-                    break;
-
-                case Conf.GameState.PAUSE:
-                    break;
-
-                case Conf.GameState.END:
-                    break;
-
-                default:
-                    throw new UnauthorizedAccessException();
+                Element.Draw(spriteBatch);
             }
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -152,12 +144,10 @@ namespace PongLegacy
         /*
          * Menu drawing methods
         */
-        private void drawTitle()
-        {
-            spriteBatch.Begin();
-            spriteBatch.DrawString(scoreFont, Conf.GAME_NAME, new Vector2(250, 50), Color.White);
-            spriteBatch.End();
-        }
+        //private void drawTitle()
+        //{
+        //    spriteBatch.DrawString(scoreFont, Conf.GAME_NAME, new Vector2(250, 50), Color.White);
+        //}
 
         /*
          * Play drawing methods

@@ -1,0 +1,30 @@
+﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+
+namespace PongLegacy
+{
+    class SpriteFont : Sprite
+    {
+        private SpriteFont font { get; set; }
+        public Color color { get; set; }
+
+        public String text { get; set; }
+
+
+        public void LoadContent(ContentManager content, string assetName)
+        {
+            font = content.Load<SpriteFont>(assetName);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(font, text, position, color);        
+        }
+
+    }
+}
