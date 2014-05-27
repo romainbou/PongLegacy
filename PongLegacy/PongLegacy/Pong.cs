@@ -28,15 +28,13 @@ namespace PongLegacy
 
         public Conf.GameState GameState { get; set; }
 
-        public List<Player> Players { get; set; }
-
 
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            GameState = Conf.GameState.MENU;
+            GameState = Conf.GameState.START;
         }
 
         /// <summary>
@@ -163,6 +161,10 @@ namespace PongLegacy
          * Play drawing methods
          * (While the game is running)
         */
+
+        /*
+         * Start drawing methods
+         * /
 
         /*
          * Pause drawing methods
