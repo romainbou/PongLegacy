@@ -10,12 +10,17 @@ namespace PongLegacy
 {
     class SpriteTexture2D : Sprite
     {
-        public Rectangle size { get; set; }
-
         public Texture2D texture { get; set; }
 
         public int width { get; set; }
         public int height { get; set; }
+
+        public SpriteTexture2D(Texture2D texture, Vector2 position, int width, int height) : base(position)
+        {
+            this.texture = texture;
+            this.width = width;
+            this.height = height;
+        }
 
 
         public override void LoadContent(ContentManager content, string assetName)
