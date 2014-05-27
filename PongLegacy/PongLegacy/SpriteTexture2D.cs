@@ -15,9 +15,8 @@ namespace PongLegacy
         public int width { get; set; }
         public int height { get; set; }
 
-        public SpriteTexture2D(Texture2D texture, Vector2 position, int width, int height) : base(position)
+        public SpriteTexture2D(Vector2 position, int width, int height) : base(position)
         {
-            this.texture = texture;
             this.width = width;
             this.height = height;
         }
