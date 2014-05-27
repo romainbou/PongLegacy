@@ -27,11 +27,11 @@ namespace PongLegacy
             {
                 
                 this.CheckWallColision();
-                foreach (Bat player in this.Pong.LeftTeam.Players)
+                foreach (Player player in this.Pong.LeftTeam.Players)
                 {
                     this.CheckPlayerColision(player);
                 }
-                foreach (Bat player in this.Pong.RightTeam.Players)
+                foreach (Player player in this.Pong.RightTeam.Players)
                 {
                     this.CheckPlayerColision(player);
                 }
@@ -57,7 +57,7 @@ namespace PongLegacy
             }
             return false;
         }
-        public Boolean CheckPlayerColision(Bat player)
+        public Boolean CheckPlayerColision(Player player)
         {
             if (this.HitBox.Intersects(player.HitBox))
             {
