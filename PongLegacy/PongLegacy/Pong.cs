@@ -27,7 +27,8 @@ namespace PongLegacy
         public Vector2 Dimensions { get; set; }//window dimensions
 
         public State GameState { get; set; }
-        
+
+
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -48,6 +49,7 @@ namespace PongLegacy
 
             // Initialize the fond for displaying the scores
             scoreFont = Content.Load<SpriteFont>("ScoreFont");
+
 
             base.Initialize();
         }
