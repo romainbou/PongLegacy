@@ -22,9 +22,8 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public List<Sprite> ToDraw;
-
-        //window dimensions
+        public List<Sprite> ToDraw { get; set; } 
+        
         public Vector2 Dimensions { get; set; }
 
         public Menu menu;
@@ -33,12 +32,12 @@ namespace PongLegacy
         public Team RightTeam { get; set; }
 
         public Conf.GameState GameState { get; set; }
+        public Ball Ball { get; set; }
 
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
             GameState = Conf.GameState.MENU;
             // TODO: instanciate menu
         }
@@ -54,6 +53,12 @@ namespace PongLegacy
             // TODO: Initialize (instanciate) Menu, start/play, end
             menu = new Menu(this);
 
+            this.Ball = new Ball(this);
+            this.LeftTeam = new Team(Conf.TeamSide.LEFT);
+            this.RightTeam = new Team(Conf.TeamSide.RIGHT);
+            this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
+            //this.GameState = Conf.GameState.PLAY;
+
             base.Initialize();
         }
 
@@ -67,9 +72,11 @@ namespace PongLegacy
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Instanciate the Sprite List
-            ToDraw = new List<Sprite>();
 
             menu.LoadContent(Content);
+            this.ToDraw = new List<Sprite>();
+            this.Ball.LoadContent(Content, "ball");
+            this.ToDraw.Add(this.Ball);
         }
 
         /// <summary>
@@ -103,6 +110,7 @@ namespace PongLegacy
                     break;
 
                 case Conf.GameState.PLAY:
+                    this.Ball.Update();
                     break;
 
                 case Conf.GameState.PAUSE:

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace PongLegacy
 {
-    public class SpriteText : Sprite
+    public class SpriteText : Sprite, IAutoLoadable
     {
         private SpriteFont font { get; set; }
         public Color color { get; set; }

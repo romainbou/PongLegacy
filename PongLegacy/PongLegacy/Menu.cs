@@ -18,18 +18,19 @@ namespace PongLegacy
         {
             this.game = game;
 
-            buttons.Add(new Button(new Vector2(50, 50), "1 player"));
-            buttons.Add(new Button(new Vector2(50, 100), "2 player"));
-            buttons.Add(new Button(new Vector2(100, 50), "1 player"));
-            buttons.Add(new Button(new Vector2(100, 100), "2 player"));
+            buttons.Add(new Button(new Vector2(100, 300), "1 player"));
+            buttons.Add(new Button(new Vector2(100, 400), "2 player"));
+            buttons.Add(new Button(new Vector2(400, 300), "1 player"));
+            buttons.Add(new Button(new Vector2(400, 400), "2 player"));
 
             foreach (Button button in buttons)
             {
                 menuSprites.Add(button);
+                menuSprites.Add(button.labelSprite);
             }
 
-            SpriteText leftTeamLabel = new SpriteText(new Vector2(20, 40), Color.White, "Left Side");
-            SpriteText rightTeamLabel = new SpriteText(new Vector2(100, 40), Color.White, "Right Side");
+            SpriteText leftTeamLabel = new SpriteText(new Vector2(20, 60), Color.White, "Left Side");
+            SpriteText rightTeamLabel = new SpriteText(new Vector2(350, 60), Color.White, "Right Side");
             menuSprites.Add(leftTeamLabel);
             menuSprites.Add(rightTeamLabel);
         }
@@ -46,6 +47,10 @@ namespace PongLegacy
                 if(sprite is IAutoLoadable){
                     IAutoLoadable loadableSprite = (IAutoLoadable)sprite;
                     loadableSprite.LoadContent(content);
+                }
+                else
+                {
+                    Console.WriteLine("nope");
                 }
             }
         }
