@@ -31,6 +31,11 @@ namespace PongLegacy
             font = content.Load<SpriteFont>(assetName);
         }
 
+        public void LoadContent(ContentManager content)
+        {
+            font = content.Load<SpriteFont>(Conf.DEFAULT_FONT);
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(font, text, position, color);        

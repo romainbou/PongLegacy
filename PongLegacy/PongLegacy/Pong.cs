@@ -22,10 +22,12 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        static List<Sprite> ToDraw;
+        public List<Sprite> ToDraw;
 
         //window dimensions
         public Vector2 Dimensions { get; set; }
+
+        public Menu menu;
 
         public Team LeftTeam { get; set; }
         public Team RightTeam { get; set; }
@@ -38,6 +40,7 @@ namespace PongLegacy
             Content.RootDirectory = "Content";
 
             GameState = Conf.GameState.MENU;
+            // TODO: instanciate menu
         }
 
         /// <summary>
@@ -49,6 +52,8 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
+            menu = new Menu(this);
+
             base.Initialize();
         }
 
@@ -63,6 +68,8 @@ namespace PongLegacy
 
             // Instanciate the Sprite List
             ToDraw = new List<Sprite>();
+
+            menu.LoadContent(Content);
         }
 
         /// <summary>
@@ -89,6 +96,7 @@ namespace PongLegacy
             {
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
+                    menu.addToDraw();
                     break;
 
                 case Conf.GameState.START:

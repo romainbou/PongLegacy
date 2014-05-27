@@ -72,8 +72,11 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAutoLoadable.cs" />
     <Compile Include="Ball.cs" />
+    <Compile Include="Button.cs" />
     <Compile Include="Conf.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="SpriteText.cs" />
     <Compile Include="SpriteTexture2D.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="Vector2D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
