@@ -22,8 +22,10 @@ namespace PongLegacy
 
         public void Update()
         {
+            this.position = new Vector2(this.position.X + this.Speed.X, this.position.Y + this.Speed.Y);
             if (!this.IsOut())
             {
+                
                 this.CheckWallColision();
                 foreach (Player player in this.Pong.LeftTeam.Players)
                 {
@@ -33,6 +35,11 @@ namespace PongLegacy
                 {
                     this.CheckPlayerColision(player);
                 }
+
+            }
+            else
+            {
+                this.ResetBall();
             }
         }
 
