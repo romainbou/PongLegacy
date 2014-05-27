@@ -31,6 +31,7 @@ namespace PongLegacy
         public Team RightTeam { get; set; }
 
         public Conf.GameState GameState { get; set; }
+        public Ball Ball { get; set; }
 
         public Pong()
         {
@@ -49,6 +50,7 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
+            this.Ball = new Ball(this);
             base.Initialize();
         }
 

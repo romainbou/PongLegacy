@@ -15,9 +15,9 @@ namespace PongLegacy
         public Rectangle HitBox{ get; set; }
         public Pong Pong { get; set; }
 
-        public Ball(Vector2 position, int width, int height, Pong pong):base(position,  width, height)
+        public Ball(Pong pong): base(new Vector2(pong.Dimensions.X / 2, pong.Dimensions.Y / 2), Conf.BALL_WIDTH, Conf.BALL_WIDTH)
         {
-            
+            this.Pong = pong;
         }
 
         public void Update()
