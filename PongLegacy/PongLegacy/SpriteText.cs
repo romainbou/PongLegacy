@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace PongLegacy
 {
-    class SpriteFont : Sprite
+    class SpriteText : Sprite
     {
         private SpriteFont font { get; set; }
         public Color color { get; set; }
@@ -16,7 +16,7 @@ namespace PongLegacy
         public String text { get; set; }
 
 
-        public void LoadContent(ContentManager content, string assetName)
+        public override void LoadContent(ContentManager content, string assetName)
         {
             font = content.Load<SpriteFont>(assetName);
         }

@@ -15,6 +15,6 @@ namespace PongLegacy
         public int y { get; set; }
 
         public abstract void LoadContent(ContentManager content, string assetName);
-        public abstract virtual void Draw(SpriteBatch spriteBatch);
+        public abstract void Draw(SpriteBatch spriteBatch);
     }
 }

@@ -24,7 +24,7 @@ namespace PongLegacy
 
         static List<Sprite> ToDraw;
 
-        private SpriteFont title;
+        private SpriteText title;
 
         public Vector2 Dimensions { get; set; }//window dimensions
 
@@ -36,7 +36,7 @@ namespace PongLegacy
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            GameState = Conf.GameState.START;
+            GameState = Conf.GameState.MENU;
         }
 
         /// <summary>
@@ -50,10 +50,11 @@ namespace PongLegacy
             // TODO: Add your initialization logic here
 
             // Initialize the fond for displaying the scores
-            title = new SpriteFont();
+            title = new SpriteText();
             title.position = new Vector2(250, 50);
             title.LoadContent(Content, "ScoreFont");
             title.text = Conf.GAME_NAME;
+            title.color = Color.White;
 
 
 
@@ -129,7 +130,7 @@ namespace PongLegacy
             GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
-            foreach (SpriteTexture2D Element in ToDraw)
+            foreach (Sprite Element in ToDraw)
             {
                 Element.Draw(spriteBatch);
             }

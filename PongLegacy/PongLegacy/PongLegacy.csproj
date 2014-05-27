@@ -79,7 +79,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Pong.cs" />
     <Compile Include="Sprite.cs" />
-    <Compile Include="SpriteFont.cs" />
+    <Compile Include="SpriteText.cs" />
     <Compile Include="SpriteTexture2D.cs" />
     <Compile Include="Team.cs" />
   </ItemGroup>

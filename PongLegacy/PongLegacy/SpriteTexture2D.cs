@@ -18,7 +18,7 @@ namespace PongLegacy
         public int height { get; set; }
 
 
-        public void LoadContent(ContentManager content, string assetName)
+        public override void LoadContent(ContentManager content, string assetName)
         {
             texture = content.Load<Texture2D>(assetName);
         }
