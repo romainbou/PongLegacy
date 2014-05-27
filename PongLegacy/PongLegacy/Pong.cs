@@ -28,6 +28,9 @@ namespace PongLegacy
 
         public Vector2 Dimensions { get; set; }//window dimensions
 
+        public Team LeftTeam { get; set; }
+        public Team RightTeam { get; set; }
+
         public Conf.GameState GameState { get; set; }
 
 
