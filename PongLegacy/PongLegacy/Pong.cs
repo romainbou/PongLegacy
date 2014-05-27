@@ -56,9 +56,6 @@ namespace PongLegacy
             title.text = Conf.GAME_NAME;
             title.color = Color.White;
 
-
-
-
             base.Initialize();
         }
 
