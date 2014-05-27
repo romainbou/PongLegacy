@@ -12,6 +12,11 @@ namespace PongLegacy
     {
         public Vector2 position { get; set; }
 
+        public Sprite(Vector2 position)
+        {
+            this.position = position;
+        }
+
         public abstract void LoadContent(ContentManager content, string assetName);
         public abstract void Draw(SpriteBatch spriteBatch);
     }

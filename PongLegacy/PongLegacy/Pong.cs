@@ -52,7 +52,6 @@ namespace PongLegacy
             // Initialize the fond for displaying the scores
             title = new SpriteText(new Vector2(250, 50), Color.White, Conf.GAME_NAME);
 
-
             base.Initialize();
         }
 
