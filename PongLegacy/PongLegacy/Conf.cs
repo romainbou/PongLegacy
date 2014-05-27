@@ -13,8 +13,8 @@ namespace PongLegacy
         public const int BALL_WIDTH = 10;
 
         /* ENUMS */
-        public enum GameState { MENU, START, PLAY, PAUSE, END };
-        public enum TeamSide { LEFT, RIGHT };
+        public  enum GameState { MENU, START, PLAY, PAUSE, END };
+        public  enum TeamSide { LEFT, RIGHT };
 
     }
 }
