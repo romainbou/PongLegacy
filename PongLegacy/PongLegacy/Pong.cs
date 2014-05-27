@@ -26,7 +26,9 @@ namespace PongLegacy
 
         public Vector2 Dimensions { get; set; }//window dimensions
 
-        public State GameState { get; set; }
+        public Conf.GameState GameState { get; set; }
+
+        public List<Player> Players { get; set; }
 
 
         public Pong()
@@ -34,7 +36,7 @@ namespace PongLegacy
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            GameState = State.MENU;
+            GameState = Conf.GameState.MENU;
         }
 
         /// <summary>
@@ -88,19 +90,19 @@ namespace PongLegacy
 
             switch (GameState)
             {
-                case State.MENU:
+                case Conf.GameState.MENU:
                     break;
 
-                case State.START:
+                case Conf.GameState.START:
                     break;
 
-                case State.PLAY:
+                case Conf.GameState.PLAY:
                     break;
 
-                case State.PAUSE:
+                case Conf.GameState.PAUSE:
                     break;
 
-                case State.END:
+                case Conf.GameState.END:
                     break;
 
                 default:
@@ -120,23 +122,23 @@ namespace PongLegacy
 
             switch (GameState)
             {
-                case State.MENU:
+                case Conf.GameState.MENU:
 
                     // Display game name
                     drawTitle();
 
                     break;
 
-                case State.START:
+                case Conf.GameState.START:
                     break;
 
-                case State.PLAY:
+                case Conf.GameState.PLAY:
                     break;
 
-                case State.PAUSE:
+                case Conf.GameState.PAUSE:
                     break;
 
-                case State.END:
+                case Conf.GameState.END:
                     break;
 
                 default:

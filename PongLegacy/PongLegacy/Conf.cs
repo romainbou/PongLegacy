@@ -10,5 +10,10 @@ namespace PongLegacy
 
         public const String GAME_NAME = "PONG LEGACY";
 
+
+        /* ENUMS */
+        public enum GameState { MENU, START, PLAY, PAUSE, END };
+        public enum TeamSide { LEFT, RIGHT };
+
     }
 }
