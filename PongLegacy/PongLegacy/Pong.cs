@@ -25,6 +25,7 @@ namespace PongLegacy
         static List<Sprite> ToDraw;
 
         private SpriteText title;
+        private Bat Bat;
 
         public Vector2 Dimensions { get; set; }//window dimensions
 
@@ -54,6 +55,7 @@ namespace PongLegacy
 
             // Initialize the fond for displaying the scores
             title = new SpriteText(new Vector2(250, 50), Color.White, Conf.GAME_NAME);
+            Bat = new Bat(new Vector2(10, 10), 100, new Team());
 
             base.Initialize();
         }
@@ -71,6 +73,9 @@ namespace PongLegacy
             ToDraw = new List<Sprite>();
             // TODO: use this.Content to load your game content here
             title.LoadContent(Content, "ScoreFont");
+
+
+            Bat.LoadContent(Content, "bluePixel");
         }
 
         /// <summary>
@@ -98,6 +103,7 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
 
                     ToDraw.Add(title);
+                    ToDraw.Add(Bat);
                     break;
 
                 case Conf.GameState.START:
