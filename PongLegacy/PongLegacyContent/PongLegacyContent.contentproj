@@ -38,13 +38,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ball.png">
-      <Name>ball</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="bluePixel.png">
       <Name>bluePixel</Name>
       <Importer>TextureImporter</Importer>
@@ -67,6 +60,13 @@
     </Compile>
     <Compile Include="yellowPixel.png">
       <Name>yellowPixel</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ball.png">
+      <Name>ball</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
