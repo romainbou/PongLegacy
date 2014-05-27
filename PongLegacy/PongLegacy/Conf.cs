@@ -10,7 +10,7 @@ namespace PongLegacy
 
         public const String GAME_NAME = "PONG LEGACY";
         public const int BAT_WIDTH = 12;
-        public const int BALL_WIDTH = 10;
+
 
         /* ENUMS */
         public  enum GameState { MENU, START, PLAY, PAUSE, END };

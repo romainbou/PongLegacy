@@ -10,12 +10,12 @@ namespace PongLegacy
 {
     public class Ball:SpriteTexture2D
     {
-        public int Radius { get; set; }
+        static int Radius =10;
         public Vector2 Speed { get; set; }
         public Rectangle HitBox{ get; set; }
         public Pong Pong { get; set; }
 
-        public Ball(Pong pong): base(new Vector2(pong.Dimensions.X / 2, pong.Dimensions.Y / 2), Conf.BALL_WIDTH, Conf.BALL_WIDTH)
+        public Ball(Pong pong): base(new Vector2(pong.Dimensions.X / 2, pong.Dimensions.Y / 2), Ball.Radius, Ball.Radius)
         {
             this.Pong = pong;
         }
@@ -69,7 +69,7 @@ namespace PongLegacy
         }
         public Boolean CheckWallColision()
         {
-            if (this.position.Y <= 0 || this.position.Y >= this.Pong.Dimensions.Y)
+            if (this.position.Y <= 0 || this.position.Y >= this.Pong.Dimensions.Y-Ball.Radius)
             {
                 this.Speed = new Vector2(this.Speed.X, -this.Speed.Y);
                 return true;
