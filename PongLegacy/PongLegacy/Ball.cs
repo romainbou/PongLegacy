@@ -15,7 +15,7 @@ namespace PongLegacy
         public Rectangle HitBox{ get; set; }
         public Pong Pong { get; set; }
 
-        public Ball(Texture2D texture, Vector2 position, int width, int height,Pong pong):base( texture,  position,  width, height)
+        public Ball(Vector2 position, int width, int height, Pong pong):base(position,  width, height)
         {
             
         }
@@ -27,11 +27,11 @@ namespace PongLegacy
             {
                 
                 this.CheckWallColision();
-                foreach (Player player in this.Pong.LeftTeam.Players)
+                foreach (Bat player in this.Pong.LeftTeam.Players)
                 {
                     this.CheckPlayerColision(player);
                 }
-                foreach (Player player in this.Pong.RightTeam.Players)
+                foreach (Bat player in this.Pong.RightTeam.Players)
                 {
                     this.CheckPlayerColision(player);
                 }
@@ -57,7 +57,7 @@ namespace PongLegacy
             }
             return false;
         }
-        public Boolean CheckPlayerColision(Player player)
+        public Boolean CheckPlayerColision(Bat player)
         {
             if (this.HitBox.Intersects(player.HitBox))
             {
