@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PongLegacy
 {
-    class Player : SpriteTexture2D
+    public class Player : SpriteTexture2D
     {
         public Team Team { get; set; }
         public Rectangle HitBox;

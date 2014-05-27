@@ -8,9 +8,13 @@ using System.Text;
 
 namespace PongLegacy
 {
-    abstract class Sprite
+    public abstract class Sprite
     {
         public Vector2 position { get; set; }
+
+        public Sprite()
+        {
+        }
 
         public Sprite(Vector2 position)
         {

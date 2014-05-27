@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PongLegacy
 {
-    class SpriteTexture2D : Sprite
+    public class SpriteTexture2D : Sprite
     {
         public Texture2D texture { get; set; }
 
