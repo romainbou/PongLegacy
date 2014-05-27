@@ -8,16 +8,19 @@ using Microsoft.Xna.Framework;
 
 namespace PongLegacy
 {
-    class SpriteText : Sprite
+    public class SpriteText : Sprite
     {
         private SpriteFont font { get; set; }
         public Color color { get; set; }
 
         public String text { get; set; }
 
+        public SpriteText() : base()
+        {
+        }
+
         public SpriteText(Vector2 position, Color color, String text) : base(position)
         {
-            this.font = font;
             this.color = color;
             this.text = text;
         }

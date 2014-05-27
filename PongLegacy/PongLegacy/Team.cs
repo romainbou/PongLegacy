@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PongLegacy
 {
-    class Team
+    public class Team
     {
         public Conf.TeamSide Side { get; set; }
         public List<Player> Players { get; set; }
