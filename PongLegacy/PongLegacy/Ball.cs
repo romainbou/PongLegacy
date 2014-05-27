@@ -45,6 +45,7 @@ namespace PongLegacy
 
         public Boolean IsOut()
         {
+            
             if(this.position.X <= 0)
             {
                 this.Pong.LeftTeam.Score++;
