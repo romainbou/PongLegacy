@@ -30,7 +30,6 @@ namespace PongLegacy
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            GameState = State.MENU;
         }
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            GameState = State.MENU;
             base.Initialize();
         }
 
@@ -112,7 +111,7 @@ namespace PongLegacy
 
             switch (GameState)
             {
-                case State.MENU:
+                case State.MENU:                    
                     break;
 
                 case State.START:
