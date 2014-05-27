@@ -11,8 +11,6 @@ namespace PongLegacy
     abstract class Sprite
     {
         public Vector2 position { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
 
         public Sprite(Vector2 position)
         {

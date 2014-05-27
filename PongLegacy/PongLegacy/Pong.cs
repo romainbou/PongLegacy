@@ -50,11 +50,7 @@ namespace PongLegacy
             // TODO: Add your initialization logic here
 
             // Initialize the fond for displaying the scores
-            title = new SpriteText();
-            title.position = new Vector2(250, 50);
-            title.LoadContent(Content, "ScoreFont");
-            title.text = Conf.GAME_NAME;
-            title.color = Color.White;
+            title = new SpriteText(new Vector2(250, 50), Color.White, Conf.GAME_NAME);
 
             base.Initialize();
         }
@@ -71,6 +67,7 @@ namespace PongLegacy
             // Instanciate the Sprite List
             ToDraw = new List<Sprite>();
             // TODO: use this.Content to load your game content here
+            title.LoadContent(Content, "ScoreFont");
         }
 
         /// <summary>
@@ -96,6 +93,7 @@ namespace PongLegacy
             switch (GameState)
             {
                 case Conf.GameState.MENU:
+
                     ToDraw.Add(title);
                     break;
 

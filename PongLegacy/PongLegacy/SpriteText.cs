@@ -15,6 +15,13 @@ namespace PongLegacy
 
         public String text { get; set; }
 
+        public SpriteText(Vector2 position, Color color, String text) : base(position)
+        {
+            this.font = font;
+            this.color = color;
+            this.text = text;
+        }
+
 
         public override void LoadContent(ContentManager content, string assetName)
         {
