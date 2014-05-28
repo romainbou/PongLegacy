@@ -107,8 +107,13 @@ namespace PongLegacy
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         this.ToDraw.Clear();
+                        this.RightTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
+                        this.LeftTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.HUMAN, this);
                         this.GameState = Conf.GameState.PLAY;
+                        
                         this.ToDraw.Add(this.Ball);
+                        this.ToDraw.Add(this.LeftTeam.Players[0]);
+                        this.ToDraw.Add(this.RightTeam.Players[0]);
                     }
                     break;
 
