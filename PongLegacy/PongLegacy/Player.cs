@@ -69,7 +69,7 @@ namespace PongLegacy
                 if (this.PlayerPosition == Conf.PlayerPosition.BACK)
                 {
                     this.position = new Vector2(Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
-                    this.Controler = new KeyboardPlayerControler(Keys.A, Keys.Q, this);
+                    this.Controler = new KeyboardPlayerControler(Keys.A, Keys.Q,this);
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace PongLegacy
                 else
                 {
                     this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
-                    this.Controler = new KeyboardPlayerControler(Keys.Up, Keys.Down, this);
+                    this.Controler = new KeyboardPlayerControler(Keys.Up, Keys.Down,this);
                 }
             }
             if (this.Type == Conf.InteligenceType.IA)
