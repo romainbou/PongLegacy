@@ -80,8 +80,8 @@ namespace PongLegacy
         {
             this.position = new Vector2(this.Pong.Dimensions.X / 2, this.Pong.Dimensions.Y / 2);
             Random random = new Random();
-            int X = (int)(10*(Math.Cos(2*Math.PI*random.NextDouble())));
-            int Y = (int)(10*(Math.Sin(2*Math.PI*random.NextDouble())));
+            int X = (int)(5*(Math.Cos(2*Math.PI*random.NextDouble())));
+            int Y = (int)(2*(Math.Sin(2*Math.PI*random.NextDouble())));
             this.Speed = new Vector2(X, Y);
         }
     }

@@ -48,10 +48,8 @@ namespace PongLegacy
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
             this.Ball = new Ball(this);
-            this.LeftTeam = new Team(Conf.TeamSide.LEFT);
-            this.RightTeam = new Team(Conf.TeamSide.RIGHT);
             this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
-            this.GameState = Conf.GameState.PLAY;
+            
             base.Initialize();
         }
 
