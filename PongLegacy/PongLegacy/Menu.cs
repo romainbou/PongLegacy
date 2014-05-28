@@ -19,9 +19,9 @@ namespace PongLegacy
             this.game = game;
 
             buttons.Add(new Button(new Vector2(100, 300), "1 player"));
-            buttons.Add(new Button(new Vector2(100, 400), "2 player"));
+            buttons.Add(new Button(new Vector2(100, 400), "2 players"));
             buttons.Add(new Button(new Vector2(400, 300), "1 player"));
-            buttons.Add(new Button(new Vector2(400, 400), "2 player"));
+            buttons.Add(new Button(new Vector2(400, 400), "2 players"));
 
             foreach (Button button in buttons)
             {

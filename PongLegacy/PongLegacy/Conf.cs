@@ -9,7 +9,7 @@ namespace PongLegacy
     {
 
         public const String GAME_NAME = "PONG LEGACY";
-        public const String DEFAULT_FONT = "ScoreFont";
+        public const String DEFAULT_FONT = "35_Corbel";
 
         public const int BAT_WIDTH = 12;
 

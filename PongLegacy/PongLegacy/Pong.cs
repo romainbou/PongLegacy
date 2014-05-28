@@ -21,6 +21,7 @@ namespace PongLegacy
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        KeyboardState keyboardState;
 
         public List<Sprite> ToDraw { get; set; } 
         
@@ -76,7 +77,6 @@ namespace PongLegacy
             menu.LoadContent(Content);
             this.ToDraw = new List<Sprite>();
             this.Ball.LoadContent(Content, "ball");
-            this.ToDraw.Add(this.Ball);
         }
 
         /// <summary>
@@ -95,6 +95,8 @@ namespace PongLegacy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            keyboardState = Keyboard.GetState();
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -104,16 +106,33 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
+                    if (keyboardState.IsKeyDown(Keys.Space))
+                    {
+                        this.ToDraw.Clear();
+                        this.GameState = Conf.GameState.PLAY;
+                        this.ToDraw.Add(this.Ball);
+                    }
                     break;
 
                 case Conf.GameState.START:
                     break;
 
                 case Conf.GameState.PLAY:
-                    this.Ball.Update();
+                    if (keyboardState.IsKeyDown(Keys.Space))
+                    {
+                        this.GameState = Conf.GameState.PAUSE;
+                    }
+                    else
+                    {
+                        this.Ball.Update();
+                    }
                     break;
 
                 case Conf.GameState.PAUSE:
+                    if (keyboardState.IsKeyDown(Keys.Space))
+                    {
+                        this.GameState = Conf.GameState.PLAY;
+                    }
                     break;
 
                 case Conf.GameState.END:
