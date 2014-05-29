@@ -26,18 +26,19 @@ namespace PongLegacy
 
         public override void Update()
         {
-            Keys[] Keys = KeyboardState.GetPressedKeys();
-            foreach (Keys key in Keys)
+            this.Player.IsAccelerating = false;
+            KeyboardState = Keyboard.GetState();
+            if (KeyboardState.IsKeyDown(this.DownKey))
             {
-                if (key.Equals(this.DownKey))
-                {
-                    this.MoveDown();
-                }
-                if (key.Equals(this.UpKey))
-                {
-                    this.MoveUp();
-                }
+                this.Player.IsAccelerating = true;
+                this.MoveDown();
             }
+            if (KeyboardState.IsKeyDown(this.UpKey))
+            {
+                this.Player.IsAccelerating = true;
+                this.MoveUp();
+            }
+            this.Player.SetSpeed();
         }
 
         public override void MoveUp()

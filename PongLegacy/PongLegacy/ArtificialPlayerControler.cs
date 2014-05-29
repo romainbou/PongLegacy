@@ -21,7 +21,7 @@ namespace PongLegacy
         }
         public override void Update()
         {
-            if (this.Player.position.X + Conf.BAT_HEIGHT / 2 < this.Player.Team.Pong.Ball.position.Y)
+            if (this.Player.position.Y + Conf.BAT_HEIGHT / 2 < this.Player.Team.Pong.Ball.position.Y)
             {
                 this.MoveDown();
             }

@@ -13,7 +13,9 @@ namespace PongLegacy
 
         public const int BAT_WIDTH = 12;
         public const int BAT_HEIGHT = 70;
-        public const int PLAYER_SPEED = 20;
+        public const int PLAYER_ACC = 1;
+        public const int PLAYER_INIT_SPEED = 2;
+        public const int PLAYER_MAX_SPEED = 12;
         public const int WINDOW_WIDTH = 1000;
         public const int WINDOW_HEIGHT = 600;
         public const int BACK_PLAYER_MARGIN = 50;

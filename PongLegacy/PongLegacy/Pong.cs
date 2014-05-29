@@ -38,6 +38,10 @@ namespace PongLegacy
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferHeight = Conf.WINDOW_HEIGHT;
+            graphics.PreferredBackBufferWidth = Conf.WINDOW_WIDTH;
+
             Content.RootDirectory = "Content";
             GameState = Conf.GameState.MENU;
             // TODO: instanciate menu
@@ -53,8 +57,9 @@ namespace PongLegacy
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
             menu = new Menu(this);
-
+            
             this.Ball = new Ball(this);
+            
             this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
             //this.GameState = Conf.GameState.PLAY;
 
@@ -107,8 +112,8 @@ namespace PongLegacy
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         this.ToDraw.Clear();
-                        this.RightTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
-                        this.LeftTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.HUMAN, this);
+                        this.LeftTeam = new Team(Conf.TeamSide.LEFT, 2, Conf.InteligenceType.HUMAN, this);
+                        this.RightTeam = new Team(Conf.TeamSide.RIGHT, 2, Conf.InteligenceType.HUMAN, this);
                         foreach (Player p in this.RightTeam.Players)
                         {
                             p.LoadContent(Content, "redPixel");
@@ -121,7 +126,9 @@ namespace PongLegacy
                         
                         this.ToDraw.Add(this.Ball);
                         this.ToDraw.Add(this.LeftTeam.Players[0]);
+                        this.ToDraw.Add(this.LeftTeam.Players[1]);
                         this.ToDraw.Add(this.RightTeam.Players[0]);
+                        this.ToDraw.Add(this.RightTeam.Players[1]);
                     }
                     break;
 
@@ -135,7 +142,14 @@ namespace PongLegacy
                     }
                     else
                     {
-                    this.Ball.Update();
+                        this.RightTeam.Players[0].Update();
+                        this.RightTeam.Players[1].Update();
+                        this.LeftTeam.Players[0].Update();
+                        this.LeftTeam.Players[1].Update();
+                        this.Ball.Update();
+                        
+                        
+                        
                     }
                     break;
 
