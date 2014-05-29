@@ -64,7 +64,7 @@ namespace PongLegacy
         private void setInital()
         {
             
-            if (this.Team.Side == Conf.TeamSide.LEFT)
+            if (this.Team.Side.Equals(Conf.TeamSide.LEFT))
             {
                 if (this.PlayerPosition == Conf.PlayerPosition.BACK)
                 {

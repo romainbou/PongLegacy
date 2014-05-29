@@ -109,6 +109,14 @@ namespace PongLegacy
                         this.ToDraw.Clear();
                         this.RightTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
                         this.LeftTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.HUMAN, this);
+                        foreach (Player p in this.RightTeam.Players)
+                        {
+                            p.LoadContent(Content, "redPixel");
+                        }
+                        foreach (Player p in this.LeftTeam.Players)
+                        {
+                            p.LoadContent(Content, "greenPixel");
+                        }
                         this.GameState = Conf.GameState.PLAY;
                         
                         this.ToDraw.Add(this.Ball);

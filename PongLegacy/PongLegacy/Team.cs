@@ -16,14 +16,14 @@ namespace PongLegacy
         public Team(Conf.TeamSide side,int nbPlayer, Conf.InteligenceType type, Pong pong)
         {
             this.Players = new List<Player>();
+            this.Score = 0;
+            this.Pong = pong;
+            this.Side = side;
             this.Players.Add(new Player(this, Conf.PlayerPosition.BACK, type));
             if (nbPlayer == 2)
             {
                 this.Players.Add(new Player(this, Conf.PlayerPosition.FRONT, type));
             }
-            this.Score = 0;
-            this.Pong = pong;
-            this.Side = side;
         }
     }
 }
