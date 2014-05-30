@@ -124,23 +124,22 @@ namespace PongLegacy
                     if (keyboardState.IsKeyDown(Keys.Enter))
                     {
                         this.ToDraw.Clear();
-                        this.LeftTeam = new Team(Conf.TeamSide.LEFT, 2, Conf.InteligenceType.HUMAN, this);
-                        this.RightTeam = new Team(Conf.TeamSide.RIGHT, 2, Conf.InteligenceType.HUMAN, this);
+                        this.LeftTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
+                        this.RightTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.IA, this);
                         foreach (Player p in this.RightTeam.Players)
                         {
-                            p.LoadContent(Content, "redPixel");
+                            p.LoadContent(Content, p.Color);
+                            this.ToDraw.Add(p);
                         }
                         foreach (Player p in this.LeftTeam.Players)
                         {
-                            p.LoadContent(Content, "greenPixel");
+                            p.LoadContent(Content, p.Color);
+                            this.ToDraw.Add(p);
                         }
                         this.GameState = Conf.GameState.PLAY;
                         
                         this.ToDraw.Add(this.Ball);
-                        this.ToDraw.Add(this.LeftTeam.Players[0]);
-                        this.ToDraw.Add(this.LeftTeam.Players[1]);
-                        this.ToDraw.Add(this.RightTeam.Players[0]);
-                        this.ToDraw.Add(this.RightTeam.Players[1]);
+                        
                     }
                     break;
 
@@ -151,10 +150,15 @@ namespace PongLegacy
                     }
                     else
                     {
-                        this.RightTeam.Players[0].Update();
-                        this.RightTeam.Players[1].Update();
-                        this.LeftTeam.Players[0].Update();
-                        this.LeftTeam.Players[1].Update();
+                        foreach (Player p in this.RightTeam.Players)
+                        {
+                            p.Update();
+                        }
+                        foreach (Player p in this.LeftTeam.Players)
+                        {
+                            p.Update();
+                        }
+                        
                         this.Ball.Update();
                         
                         

@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Net.Sockets;
+using System.Net;
 
 namespace PongLegacy
 {
@@ -20,6 +22,7 @@ namespace PongLegacy
         public int CurrentSpeed { get; set; }
         public Boolean isInIntersection { get; set; }
         public Boolean IsAccelerating { get; set; }
+        public String Color { get; set; }
         public Player(Team team, Conf.PlayerPosition playerPosition, Conf.InteligenceType type) : base(Vector2.Zero,Conf.BAT_WIDTH,Conf.BAT_HEIGHT)
         {
             this.Team = team;
@@ -54,7 +57,7 @@ namespace PongLegacy
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, this.HitBox, Color.White);
+            spriteBatch.Draw(texture, position, this.HitBox, Microsoft.Xna.Framework.Color.White );
         }
         public void MoveUp()
         {
@@ -88,11 +91,13 @@ namespace PongLegacy
                 {
                     this.position = new Vector2(Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.A, Keys.Q,this);
+                    this.Color = Conf.PlayerColor.BLUE;
                 }
                 else
                 {
                     this.position = new Vector2(Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.F, Keys.V, this);
+                    this.Color = Conf.PlayerColor.RED;
                 }
             }
             else
@@ -101,11 +106,13 @@ namespace PongLegacy
                 {
                     this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.Up, Keys.Down, this);
+                    this.Color = Conf.PlayerColor.GREEN;
                 }
                 else
                 {
                     this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.J, Keys.N, this);
+                    this.Color = Conf.PlayerColor.YELLOW;
                 }
             }
             if (this.Type == Conf.InteligenceType.IA)
@@ -123,7 +130,10 @@ namespace PongLegacy
             {
                 this.CurrentSpeed = Conf.PLAYER_INIT_SPEED;
             }
+            
         }
+        
+        
         
     }
 }
