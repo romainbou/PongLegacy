@@ -30,7 +30,7 @@ namespace PongLegacy
         public Vector2 Dimensions { get; set; }
 
         public Menu menu;
-        public Pause start;
+        public Pause pause;
 
         public Team LeftTeam { get; set; }
         public Team RightTeam { get; set; }
@@ -66,7 +66,7 @@ namespace PongLegacy
             this.IsMouseVisible = true;
             this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
             menu = new Menu(this);
-            start = new Pause(this);
+            pause = new Pause(this);
 
             this.Ball = new Ball(this);
             this.MiddleLine = new MiddleLine(Window.ClientBounds.Width, Window.ClientBounds.Height);
@@ -86,7 +86,7 @@ namespace PongLegacy
             // Instanciate the Sprite List
 
             menu.LoadContent(Content);
-            start.LoadContent(Content);
+            pause.LoadContent(Content);
             this.ToDraw = new List<Sprite>();
             this.Ball.LoadContent(Content, "ball");
             this.MiddleLine.LoadContent(Content, "whitePixel");
@@ -132,7 +132,7 @@ namespace PongLegacy
                         this.LeftTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
                         this.RightTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.IA, this);
 
-                        start.addToDraw(Content);
+                        pause.addToDraw(Content);
                         this.ToDraw.Add(MiddleLine);
                         this.ToDraw.Add(this.Ball);
                         foreach (Player p in this.RightTeam.Players)
@@ -153,7 +153,7 @@ namespace PongLegacy
 
                     if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
-                        this.start.removeToDraw();
+                        this.pause.removeToDraw();
                         this.GameState = Conf.GameState.PLAY;
                     }
                     break;
@@ -161,7 +161,7 @@ namespace PongLegacy
                 case Conf.GameState.PLAY:
                     if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
-                        this.start.addToDraw(Content);
+                        this.pause.addToDraw(Content);
                         this.GameState = Conf.GameState.PAUSE;
                     }
                     else

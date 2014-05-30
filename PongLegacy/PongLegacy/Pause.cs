@@ -17,7 +17,7 @@ namespace PongLegacy
         {
             this.game = game;
 
-            startSprites.Add(new SpriteText(new Vector2(220,160), Color.White, "PAUSE - Press Space to begin"));
+            startSprites.Add(new SpriteText(new Vector2(200,160), Color.White, Conf.PAUSE_NAME));
         }
 
         public void initialize()
@@ -50,11 +50,13 @@ namespace PongLegacy
 
             foreach (Player p in this.game.RightTeam.Players)
             {
+                p.keySprite.position = new Vector2(p.position.X - Conf.KEY_CONTROL_PICTURE_MARGIN_RIGHT, p.position.Y - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP);
                 p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
                 this.game.ToDraw.Add(p.keySprite);
             } 
             foreach (Player p in this.game.LeftTeam.Players)
             {
+                p.keySprite.position = new Vector2(p.position.X + Conf.KEY_CONTROL_PICTURE_MARGIN_LEFT, p.position.Y - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP);
                 p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
                 this.game.ToDraw.Add(p.keySprite);
             }
