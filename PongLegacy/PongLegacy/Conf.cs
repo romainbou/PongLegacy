@@ -21,8 +21,8 @@ namespace PongLegacy
         public const int BACK_PLAYER_MARGIN = 50;
         public const int FRONT_PLAYER_MARGIN = 250;
 
-        public const int BUTTON_WIDTH = 100;
-        public const int BUTTON_HEIGHT = 50;
+        public const int BUTTON_WIDTH = 250;
+        public const int BUTTON_HEIGHT = 70;
 
 
         /* ENUMS */

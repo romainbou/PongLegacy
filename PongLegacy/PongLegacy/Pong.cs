@@ -22,6 +22,8 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState keyboardState;
+        MouseState mouseState;
+        int MouseX, MouseY;
 
         public List<Sprite> ToDraw { get; set; } 
         
@@ -103,6 +105,7 @@ namespace PongLegacy
         protected override void Update(GameTime gameTime)
         {
             keyboardState = Keyboard.GetState();
+            mouseState = Mouse.GetState();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -113,6 +116,27 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
+                    foreach (Button currentButton in menu.buttons)
+                    {
+                        if (currentButton.state != Button.ButtonState.SELECTED)
+                        {
+                            if (currentButton.HitBox.Contains(mouseState.X, mouseState.Y))
+                            {
+                                if (currentButton.state != Button.ButtonState.HOVER)
+                                {
+                                    currentButton.setState(Content, Button.ButtonState.HOVER);
+                                }
+                            }
+                            else
+                            {
+                                if (currentButton.state != Button.ButtonState.DEFAULT)
+                                {
+                                    currentButton.setState(Content, Button.ButtonState.DEFAULT);
+                                }
+                            }
+                        }
+                    }
+
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         this.ToDraw.Clear();

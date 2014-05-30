@@ -11,17 +11,22 @@ namespace PongLegacy
     public class Menu
     {
         private Pong game;
-        private List<Sprite> menuSprites = new List<Sprite>();
-        private List<Button> buttons = new List<Button>();
-
+        public List<Sprite> menuSprites { get; set; }
+        public List<Button> buttons { get; set;}
         public Menu(Pong game)
         {
             this.game = game;
+            buttons = new List<Button>();
+            menuSprites = new List<Sprite>();
 
-            buttons.Add(new Button(new Vector2(100, 300), "1 player"));
-            buttons.Add(new Button(new Vector2(100, 400), "2 players"));
-            buttons.Add(new Button(new Vector2(400, 300), "1 player"));
-            buttons.Add(new Button(new Vector2(400, 400), "2 players"));
+            buttons.Add(new Button(new Vector2(130, 200), "1 player"));
+            buttons.Add(new Button(new Vector2(130, 300), "2 players"));
+            buttons.Add(new Button(new Vector2(130, 400), "AI"));
+            buttons.Add(new Button(new Vector2(630, 200), "1 player"));
+            buttons.Add(new Button(new Vector2(630, 300), "2 players"));
+            buttons.Add(new Button(new Vector2(630, 400), "AI"));
+
+            buttons.Add(new Button(new Vector2(370, 500), "GO !"));
 
             foreach (Button button in buttons)
             {
@@ -29,8 +34,8 @@ namespace PongLegacy
                 menuSprites.Add(button.labelSprite);
             }
 
-            SpriteText leftTeamLabel = new SpriteText(new Vector2(20, 60), Color.White, "Left Side");
-            SpriteText rightTeamLabel = new SpriteText(new Vector2(350, 60), Color.White, "Right Side");
+            SpriteText leftTeamLabel = new SpriteText(new Vector2(100, 40), Color.White, "Left Side");
+            SpriteText rightTeamLabel = new SpriteText(new Vector2(600, 40), Color.White, "Right Side");
             menuSprites.Add(leftTeamLabel);
             menuSprites.Add(rightTeamLabel);
         }
@@ -47,10 +52,6 @@ namespace PongLegacy
                 if(sprite is IAutoLoadable){
                     IAutoLoadable loadableSprite = (IAutoLoadable)sprite;
                     loadableSprite.LoadContent(content);
-                }
-                else
-                {
-                    Console.WriteLine("nope");
                 }
             }
         }
