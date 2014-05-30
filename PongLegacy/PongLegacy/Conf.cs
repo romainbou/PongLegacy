@@ -31,5 +31,13 @@ namespace PongLegacy
 
         public enum PlayerPosition { FRONT, BACK };
         public enum InteligenceType { HUMAN, IA};
+
+        public class PlayerColor
+        {
+            public const String RED = "redPixel";
+            public const String BLUE = "bluePixel";
+            public const String GREEN = "greenPixel";
+            public const String YELLOW = "yellowPixel";
+        }
     }
 }
