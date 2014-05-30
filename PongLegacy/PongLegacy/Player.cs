@@ -46,6 +46,7 @@ namespace PongLegacy
         {
             this.Controler.Update();
             this.setHitBox();
+            this.SetSpeed();
         }
         private void setHitBox()
         {
