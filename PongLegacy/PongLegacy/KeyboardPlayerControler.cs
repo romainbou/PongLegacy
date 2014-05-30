@@ -38,7 +38,7 @@ namespace PongLegacy
                 this.Player.IsAccelerating = true;
                 this.MoveUp();
             }
-            this.Player.SetSpeed();
+            
         }
 
         public override void MoveUp()
