@@ -116,26 +116,7 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
-                    foreach (Button currentButton in menu.buttons)
-                    {
-                        if (currentButton.state != Button.ButtonState.SELECTED)
-                        {
-                            if (currentButton.HitBox.Contains(mouseState.X, mouseState.Y))
-                            {
-                                if (currentButton.state != Button.ButtonState.HOVER)
-                                {
-                                    currentButton.setState(Content, Button.ButtonState.HOVER);
-                                }
-                            }
-                            else
-                            {
-                                if (currentButton.state != Button.ButtonState.DEFAULT)
-                                {
-                                    currentButton.setState(Content, Button.ButtonState.DEFAULT);
-                                }
-                            }
-                        }
-                    }
+                    menu.handleMouse(Content, mouseState);
 
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {

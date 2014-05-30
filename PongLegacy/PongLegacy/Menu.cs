@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PongLegacy
 {
@@ -69,6 +70,30 @@ namespace PongLegacy
             foreach (Sprite sprite in menuSprites)
             {
                 game.ToDraw.Remove(sprite);
+            }
+        }
+
+        public void handleMouse(ContentManager Content, MouseState mouseState)
+        {
+            foreach (Button currentButton in this.buttons)
+            {
+                if (currentButton.state != Button.ButtonState.SELECTED)
+                {
+                    if (currentButton.HitBox.Contains(mouseState.X, mouseState.Y))
+                    {
+                        if (currentButton.state != Button.ButtonState.HOVER)
+                        {
+                            currentButton.setState(Content, Button.ButtonState.HOVER);
+                        }
+                    }
+                    else
+                    {
+                        if (currentButton.state != Button.ButtonState.DEFAULT)
+                        {
+                            currentButton.setState(Content, Button.ButtonState.DEFAULT);
+                        }
+                    }
+                }
             }
         }
     }
