@@ -89,6 +89,7 @@
     <Compile Include="SpriteTexture2D.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="Team.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="Vector2D.cs" />
   </ItemGroup>
   <ItemGroup>

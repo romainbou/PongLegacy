@@ -5,9 +5,10 @@ using System.Text;
 
 namespace PongLegacy
 {
-    public class ArtificialPlayerControler:IPlayerControler
+    public class ArtificialPlayerControler : IPlayerControler
     {
-        public ArtificialPlayerControler(Player player): base(player)
+        public ArtificialPlayerControler(Player player)
+            : base(player)
         {
             this.Player.IsAccelerating = true;
         }
@@ -23,7 +24,7 @@ namespace PongLegacy
         }
         public override void Update()
         {
-            if (this.Player.position.Y + Conf.BAT_HEIGHT / 2 < this.Player.Team.Pong.Ball.position.Y-20)
+            if (this.Player.position.Y + Conf.BAT_HEIGHT / 2 < this.Player.Team.Pong.Ball.position.Y - 20)
             {
                 this.MoveDown();
             }
@@ -32,5 +33,8 @@ namespace PongLegacy
                 this.MoveUp();
             }
         }
+
+
+        
     }
 }

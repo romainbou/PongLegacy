@@ -48,6 +48,7 @@ namespace PongLegacy
                 {
                     this.CheckPlayerColision(player);
                 }
+                
                 this.position = new Vector2(this.position.X + this.Speed.X, this.position.Y + this.Speed.Y);
             }
             else
@@ -97,6 +98,7 @@ namespace PongLegacy
                     final.Y = (int)((vector.Y * Math.Cos(coef * angle) + vector.X * Math.Sin(coef * angle)));
                 }
                 this.Speed = final;
+                
                 player.isInIntersection = true;
                 return true;
             }
@@ -122,6 +124,48 @@ namespace PongLegacy
             int X = -5;//(int)(5*(Math.Cos(2*Math.PI*random.NextDouble())));
             int Y = 0;//(int)(2*(Math.Sin(2*Math.PI*random.NextDouble())));
             this.Speed = new Vector2(X, Y);
+        }
+        private void correctSpeed()
+        {
+            Double angle = Math.Atan2(this.Speed.Y, this.Speed.X);
+            Double max, rotateAngle;
+
+            if (this.Speed.X > 0)
+            {
+                if (this.Speed.Y > 0)
+                {
+                    max = Math.PI / 4;
+
+                }
+                else
+                {
+                    max = 7 * Math.PI / 4;
+
+                }
+            }
+            else
+            {
+                if (this.Speed.Y > 0)
+                {
+                    max = 3 * Math.PI / 4;
+
+                }
+                else
+                {
+                    max = 5 * Math.PI / 4;
+
+                }
+            }
+            rotateAngle = max - angle;
+            Console.WriteLine(180 * angle / Math.PI);
+            if (rotateAngle < 0)
+            {
+                Vector2 newSpeed = Utils.rotate(rotateAngle, this.Speed);
+                this.Speed = newSpeed;
+                angle = Math.Atan2(this.Speed.Y, this.Speed.X);
+                
+            }
+
         }
     }
 }
