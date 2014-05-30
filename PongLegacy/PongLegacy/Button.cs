@@ -17,11 +17,13 @@ namespace PongLegacy
         public SpriteText labelSprite;
         public enum ButtonState { DEFAULT, HOVER, SELECTED };
         public ButtonState state;
+        public List<Texture2D> buttonTextures { get; set; }
 
         public Button(Vector2 position, string label) : base(position,Conf.BUTTON_WIDTH, Conf.BUTTON_HEIGHT)
         {
             state = ButtonState.DEFAULT;
             this.label = label;
+            buttonTextures = new List<Texture2D>();
             HitBox = new Rectangle((int)position.X, (int)position.Y, this.width, this.height);
             SpriteBox = new Rectangle();
             SpriteBox.Width = this.width;
@@ -38,22 +40,24 @@ namespace PongLegacy
 
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("button");
+            buttonTextures.Add(content.Load<Texture2D>("button"));
+            buttonTextures.Add(content.Load<Texture2D>("buttonPressed"));
+            texture = buttonTextures[0];
         }
 
-        public void setState(ContentManager content, ButtonState state)
+        public void setState(ButtonState state)
         {
             this.state = state;
             switch (state)
             {
                 case ButtonState.DEFAULT:
-                    texture = content.Load<Texture2D>("button");
+                    texture = buttonTextures[0];
                 break;
                 case ButtonState.HOVER:
-                    texture = content.Load<Texture2D>("buttonPressed");
+                texture = buttonTextures[1];
                 break;
                 case ButtonState.SELECTED:
-                    texture = content.Load<Texture2D>("buttonPressed");
+                texture = buttonTextures[1];
                 break;
 
                 default:

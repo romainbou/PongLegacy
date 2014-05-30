@@ -14,6 +14,7 @@ namespace PongLegacy
         private Pong game;
         public List<Sprite> menuSprites { get; set; }
         public List<Button> buttons { get; set;}
+
         public Menu(Pong game)
         {
             this.game = game;
@@ -83,14 +84,14 @@ namespace PongLegacy
                     {
                         if (currentButton.state != Button.ButtonState.HOVER)
                         {
-                            currentButton.setState(Content, Button.ButtonState.HOVER);
+                            currentButton.setState(Button.ButtonState.HOVER);
                         }
                     }
                     else
                     {
                         if (currentButton.state != Button.ButtonState.DEFAULT)
                         {
-                            currentButton.setState(Content, Button.ButtonState.DEFAULT);
+                            currentButton.setState(Button.ButtonState.DEFAULT);
                         }
                     }
                 }
