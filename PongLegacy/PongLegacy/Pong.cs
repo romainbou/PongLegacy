@@ -56,6 +56,7 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
+            this.IsMouseVisible = true;
             menu = new Menu(this);
             
             this.Ball = new Ball(this);
@@ -125,6 +126,7 @@ namespace PongLegacy
                             this.ToDraw.Add(p);
                         }
                         this.GameState = Conf.GameState.PLAY;
+                        this.IsMouseVisible = false;
                         
                         this.ToDraw.Add(this.Ball);
                         
