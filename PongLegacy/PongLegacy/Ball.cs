@@ -10,14 +10,14 @@ namespace PongLegacy
 {
     public class Ball:SpriteTexture2D
     {
-        static int Radius =20;
+        static int Radius = 20;
         public Vector2 Speed { get; set; }
         public Rectangle HitBox;
         public float Acceleration { get; set; }
         public Pong Pong { get; set; }
         
 
-        public Ball(Pong pong): base(new Vector2(pong.Dimensions.X / 2, pong.Dimensions.Y / 2), Ball.Radius, Ball.Radius)
+        public Ball(Pong pong): base(new Vector2(pong.Dimensions.X / 2 - Ball.Radius/2, pong.Dimensions.Y / 2  - Ball.Radius/2 ), Ball.Radius, Ball.Radius)
         {
             this.Acceleration = .2f;
             this.Pong = pong;
