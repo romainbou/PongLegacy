@@ -22,6 +22,8 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState keyboardState;
+        MouseState mouseState;
+        int MouseX, MouseY;
 
         public List<Sprite> ToDraw { get; set; } 
         
@@ -57,6 +59,7 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
+            this.IsMouseVisible = true;
             menu = new Menu(this);
             start = new Start(this);
             
@@ -102,6 +105,7 @@ namespace PongLegacy
         protected override void Update(GameTime gameTime)
         {
             keyboardState = Keyboard.GetState();
+            mouseState = Mouse.GetState();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -112,6 +116,8 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
+                    menu.handleMouse(Content, mouseState);
+
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         this.ToDraw.Clear();
@@ -137,6 +143,7 @@ namespace PongLegacy
                             this.ToDraw.Add(p);
                         }
                         this.GameState = Conf.GameState.PLAY;
+                        this.IsMouseVisible = false;
                         
                         this.ToDraw.Add(this.Ball);
                         
