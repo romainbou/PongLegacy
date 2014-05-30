@@ -28,6 +28,7 @@ namespace PongLegacy
         public Vector2 Dimensions { get; set; }
 
         public Menu menu;
+        public Start start;
 
         public Team LeftTeam { get; set; }
         public Team RightTeam { get; set; }
@@ -57,6 +58,7 @@ namespace PongLegacy
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
             menu = new Menu(this);
+            start = new Start(this);
             
             this.Ball = new Ball(this);
             
@@ -78,6 +80,7 @@ namespace PongLegacy
             // Instanciate the Sprite List
 
             menu.LoadContent(Content);
+            start.LoadContent(Content);
             this.ToDraw = new List<Sprite>();
             this.Ball.LoadContent(Content, "ball");
         }
@@ -112,6 +115,15 @@ namespace PongLegacy
                     if (keyboardState.IsKeyDown(Keys.Space))
                     {
                         this.ToDraw.Clear();
+                        this.GameState = Conf.GameState.START;
+                    }
+                    break;
+
+                case Conf.GameState.START:
+                    start.addToDraw();
+                    if (keyboardState.IsKeyDown(Keys.Enter))
+                    {
+                        this.ToDraw.Clear();
                         this.LeftTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
                         this.RightTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.IA, this);
                         foreach (Player p in this.RightTeam.Players)
@@ -129,9 +141,6 @@ namespace PongLegacy
                         this.ToDraw.Add(this.Ball);
                         
                     }
-                    break;
-
-                case Conf.GameState.START:
                     break;
 
                 case Conf.GameState.PLAY:
