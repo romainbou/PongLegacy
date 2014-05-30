@@ -21,7 +21,10 @@ namespace PongLegacy
         {
             this.Acceleration = .2f;
             this.Pong = pong;
+            this.ResetBall();
             this.setHitBox();
+            
+
         }
         private void setHitBox()
         {
@@ -48,7 +51,7 @@ namespace PongLegacy
                 {
                     this.CheckPlayerColision(player);
                 }
-                
+                Console.WriteLine(this.position.X);
                 this.position = new Vector2(this.position.X + this.Speed.X, this.position.Y + this.Speed.Y);
             }
             else
@@ -119,7 +122,7 @@ namespace PongLegacy
         }
         public void ResetBall()
         {
-            this.position = new Vector2(this.Pong.Dimensions.X / 2, this.Pong.Dimensions.Y / 2);
+            this.position = new Vector2(this.Pong.Dimensions.X / 2 - Ball.Radius / 2, this.Pong.Dimensions.Y / 2 - Ball.Radius / 2);
             Random random = new Random();
             int X = -5;//(int)(5*(Math.Cos(2*Math.PI*random.NextDouble())));
             int Y = 0;//(int)(2*(Math.Sin(2*Math.PI*random.NextDouble())));
