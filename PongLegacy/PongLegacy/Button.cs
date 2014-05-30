@@ -17,6 +17,8 @@ namespace PongLegacy
         public SpriteText labelSprite;
         public enum ButtonState { DEFAULT, HOVER, SELECTED };
         public ButtonState state;
+        public int nbPlayer;
+        public PongLegacy.Conf.InteligenceType intelligenceType;
         public List<Texture2D> buttonTextures { get; set; }
 
         public Button(Vector2 position, string label) : base(position,Conf.BUTTON_WIDTH, Conf.BUTTON_HEIGHT)
@@ -30,6 +32,12 @@ namespace PongLegacy
             SpriteBox.Height = this.height;
             Vector2 textPostion = new Vector2(position.X + 40, position.Y + 5);
             labelSprite = new SpriteText(textPostion, Color.White, label);
+        }
+
+        public Button(Vector2 position, string label, int nbPlayer, Conf.InteligenceType intelligenceType) : this(position, label)
+        {
+            this.nbPlayer = nbPlayer;
+            this.intelligenceType = intelligenceType;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

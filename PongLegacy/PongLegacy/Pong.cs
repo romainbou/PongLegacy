@@ -127,34 +127,15 @@ namespace PongLegacy
                  //   {
                         menu.handleMouse(Content, previousMouseState, currentMouseState);
                  //   }
-
-                    if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter))
-                    {
-                        this.IsMouseVisible = false;
-                        this.ToDraw.Clear();
-
-                        //@todo mettre dans le menu au clique sur le bouton go avec les bons parametres
-                        this.LeftTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
-                        this.RightTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.IA, this);
-
-                        pause.addToDraw(Content);
-                        this.ToDraw.Add(MiddleLine);
-                        this.ToDraw.Add(this.Ball);
-                        this.LeftTeam.Score.LoadContent(Content, "55_Corbel");
-                        this.RightTeam.Score.LoadContent(Content, "55_Corbel");
-                        this.ToDraw.Add(this.LeftTeam.Score);
-                        this.ToDraw.Add(this.RightTeam.Score);
-                        foreach (Player p in this.RightTeam.Players)
+                        if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
                         {
-                            p.LoadContent(Content, p.Color);
-                            this.ToDraw.Add(p);
-                        } 
-                        foreach (Player p in this.LeftTeam.Players)
-                        {
-                            p.LoadContent(Content, p.Color);
-                            this.ToDraw.Add(p);
+                            menu.onClick();
                         }
-                        this.GameState = Conf.GameState.PAUSE;
+
+                    if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter) && menu.areChoicesMade())
+                    {
+                        menu.initializeGame();
+                        this.startGame();
                     }
                     break;
 
@@ -215,6 +196,29 @@ namespace PongLegacy
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void startGame()
+        {
+            this.ToDraw.Clear();
+            pause.addToDraw(Content);
+            this.ToDraw.Add(MiddleLine);
+            this.ToDraw.Add(this.Ball);
+            this.LeftTeam.Score.LoadContent(Content, "55_Corbel");
+            this.RightTeam.Score.LoadContent(Content, "55_Corbel");
+            this.ToDraw.Add(this.LeftTeam.Score);
+            this.ToDraw.Add(this.RightTeam.Score);
+            foreach (Player p in this.RightTeam.Players)
+            {
+                p.LoadContent(Content, p.Color);
+                this.ToDraw.Add(p);
+            }
+            foreach (Player p in this.LeftTeam.Players)
+            {
+                p.LoadContent(Content, p.Color);
+                this.ToDraw.Add(p);
+            }
+            this.GameState = Conf.GameState.PAUSE;
         }
     }
 }

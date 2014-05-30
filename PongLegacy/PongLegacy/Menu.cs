@@ -15,18 +15,29 @@ namespace PongLegacy
         public List<Sprite> menuSprites { get; set; }
         public List<Button> buttons { get; set;}
 
+        public List<Button> leftChoices;
+        public List<Button> rightChoices;
+
         public Menu(Pong game)
         {
             this.game = game;
             buttons = new List<Button>();
+            leftChoices = new List<Button>();
+            rightChoices = new List<Button>();
             menuSprites = new List<Sprite>();
 
-            buttons.Add(new Button(new Vector2(130, 200), "1 player"));
-            buttons.Add(new Button(new Vector2(130, 300), "2 players"));
-            buttons.Add(new Button(new Vector2(130, 400), "AI"));
-            buttons.Add(new Button(new Vector2(630, 200), "1 player"));
-            buttons.Add(new Button(new Vector2(630, 300), "2 players"));
-            buttons.Add(new Button(new Vector2(630, 400), "AI"));
+            buttons.Add(new Button(new Vector2(130, 200), "1 player", 1, Conf.InteligenceType.HUMAN));
+            leftChoices.Add(buttons.Last());
+            buttons.Add(new Button(new Vector2(130, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
+            leftChoices.Add(buttons.Last());
+            buttons.Add(new Button(new Vector2(130, 400), "AI", 1, Conf.InteligenceType.IA));
+            leftChoices.Add(buttons.Last());
+            buttons.Add(new Button(new Vector2(630, 200), "1 player", 1, Conf.InteligenceType.HUMAN));
+            rightChoices.Add(buttons.Last());
+            buttons.Add(new Button(new Vector2(630, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
+            rightChoices.Add(buttons.Last());
+            buttons.Add(new Button(new Vector2(630, 400), "AI", 1, Conf.InteligenceType.IA));
+            rightChoices.Add(buttons.Last());
 
             buttons.Add(new Button(new Vector2(370, 500), "GO !"));
 
@@ -96,6 +107,88 @@ namespace PongLegacy
                     }
                 }
             }
+        }
+
+        public void onClick()
+        {
+            foreach (Button currentButton in this.buttons)
+            {
+                if (currentButton.state == Button.ButtonState.HOVER)
+                {
+                    if (currentButton == buttons.Last())
+                    {
+                        if (areChoicesMade())
+                        {
+                            initializeGame();
+                            game.startGame();
+                        }
+                    }
+                    if (leftChoices.Contains(currentButton))
+                    {
+                        foreach (Button currentSideButton in leftChoices)
+                        {
+                            if (currentButton != currentSideButton)
+                            {
+                                currentSideButton.setState(Button.ButtonState.DEFAULT);
+                            }
+                        }
+                    }
+                    if (rightChoices.Contains(currentButton))
+                    {
+                        foreach (Button currentSideButton in rightChoices)
+                        {
+                            if (currentButton != currentSideButton)
+                            {
+                                currentSideButton.setState(Button.ButtonState.DEFAULT);
+                            }
+                        }
+                    }
+                    currentButton.setState(Button.ButtonState.SELECTED);
+                }
+            }
+        }
+        public bool isOneChoiceSelected(List<Button> buttonList){
+            foreach (Button currentButton in buttonList){
+                if(currentButton.state == Button.ButtonState.SELECTED){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool areChoicesMade()
+        {
+            if (isOneChoiceSelected(leftChoices) && isOneChoiceSelected(rightChoices))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void initializeGame(){
+            game.IsMouseVisible = false;
+            Team teamLeft = null;
+            Team teamRight = null;
+            foreach (Button currentButton in leftChoices)
+            {
+                if (currentButton.state == Button.ButtonState.SELECTED)
+                {
+                    teamLeft = new Team(Conf.TeamSide.LEFT, currentButton.nbPlayer, currentButton.intelligenceType, game);
+                }
+            }
+            foreach (Button currentButton in rightChoices)
+            {
+                if (currentButton.state == Button.ButtonState.SELECTED)
+                {
+                    teamRight = new Team(Conf.TeamSide.RIGHT, currentButton.nbPlayer, currentButton.intelligenceType, game);
+                }
+            }
+            if (teamLeft == null || teamRight == null)
+            {
+                throw new UnauthorizedAccessException();
+            }
+            game.LeftTeam = teamLeft;
+            game.RightTeam = teamRight;
         }
     }
 }
