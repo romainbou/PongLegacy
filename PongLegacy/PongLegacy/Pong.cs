@@ -22,6 +22,8 @@ namespace PongLegacy
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState keyboardState;
+        MouseState mouseState;
+        int MouseX, MouseY;
 
         public List<Sprite> ToDraw { get; set; }
 
@@ -36,6 +38,9 @@ namespace PongLegacy
         public Conf.GameState GameState { get; set; }
         public Ball Ball { get; set; }
         public MiddleLine MiddleLine { get; set; }
+
+        public KeyboardState currentKBState;
+        public KeyboardState previousKBState;
 
         public Pong()
         {
@@ -58,14 +63,13 @@ namespace PongLegacy
         protected override void Initialize()
         {
             // TODO: Initialize (instanciate) Menu, start/play, end
+            this.IsMouseVisible = true;
+            this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
             menu = new Menu(this);
             start = new Pause(this);
 
             this.Ball = new Ball(this);
             this.MiddleLine = new MiddleLine(Window.ClientBounds.Width, Window.ClientBounds.Height);
-
-            this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
-            //this.GameState = Conf.GameState.PLAY;
 
             base.Initialize();
         }
@@ -104,7 +108,9 @@ namespace PongLegacy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            keyboardState = Keyboard.GetState();
+            previousKBState = currentKBState;
+            currentKBState = Keyboard.GetState();
+            mouseState = Mouse.GetState();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -115,28 +121,28 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
-                    if (keyboardState.IsKeyDown(Keys.Enter))
+                    menu.handleMouse(Content, mouseState);
+
+                    if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter))
                     {
+                        this.IsMouseVisible = false;
                         this.ToDraw.Clear();
+
                         //@todo mettre dans le menu au clique sur le bouton go avec les bons parametres
                         this.LeftTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
                         this.RightTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.IA, this);
-    
-                        start.addToDraw();
+
+                        start.addToDraw(Content);
                         this.ToDraw.Add(MiddleLine);
                         this.ToDraw.Add(this.Ball);
                         foreach (Player p in this.RightTeam.Players)
                         {
                             p.LoadContent(Content, p.Color);
-                            p.keySprite.LoadContent(Content, "key"+p.keyUp+p.keyDown);
-                          this.ToDraw.Add(p.keySprite);
-                          this.ToDraw.Add(p);
+                            this.ToDraw.Add(p);
                         } 
                         foreach (Player p in this.LeftTeam.Players)
                         {
                             p.LoadContent(Content, p.Color);
-                            p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
-                            this.ToDraw.Add(p.keySprite);
                             this.ToDraw.Add(p);
                         }
                         this.GameState = Conf.GameState.PAUSE;
@@ -145,15 +151,17 @@ namespace PongLegacy
 
                 case Conf.GameState.PAUSE:
 
-                    if (keyboardState.IsKeyDown(Keys.Space))
+                    if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
+                        this.start.removeToDraw();
                         this.GameState = Conf.GameState.PLAY;
                     }
                     break;
 
                 case Conf.GameState.PLAY:
-                    if (keyboardState.IsKeyDown(Keys.Space))
+                    if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
+                        this.start.addToDraw(Content);
                         this.GameState = Conf.GameState.PAUSE;
                     }
                     else

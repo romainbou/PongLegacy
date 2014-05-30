@@ -41,11 +41,22 @@ namespace PongLegacy
             }
         }
 
-        public void addToDraw()
+        public void addToDraw(ContentManager Content)
         {
             foreach (Sprite sprite in startSprites)
             {
                 game.ToDraw.Add(sprite);
+            }
+
+            foreach (Player p in this.game.RightTeam.Players)
+            {
+                p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
+                this.game.ToDraw.Add(p.keySprite);
+            } 
+            foreach (Player p in this.game.LeftTeam.Players)
+            {
+                p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
+                this.game.ToDraw.Add(p.keySprite);
             }
         }
 
@@ -54,6 +65,15 @@ namespace PongLegacy
             foreach (Sprite sprite in startSprites)
             {
                 game.ToDraw.Remove(sprite);
+            }
+
+            foreach (Player p in this.game.RightTeam.Players)
+            {
+                this.game.ToDraw.Remove(p.keySprite);
+            }
+            foreach (Player p in this.game.LeftTeam.Players)
+            {
+                this.game.ToDraw.Remove(p.keySprite);
             }
         }
     }

@@ -12,26 +12,57 @@ namespace PongLegacy
     {
 
         public Rectangle HitBox;
+        public Rectangle SpriteBox;
         public string label;
         public SpriteText labelSprite;
+        public enum ButtonState { DEFAULT, HOVER, SELECTED };
+        public ButtonState state;
+        public List<Texture2D> buttonTextures { get; set; }
 
         public Button(Vector2 position, string label) : base(position,Conf.BUTTON_WIDTH, Conf.BUTTON_HEIGHT)
         {
-            HitBox = new Rectangle();
-            HitBox.Width = this.width;
-            HitBox.Height = this.height;
-            labelSprite = new SpriteText(position, Color.White, label);
+            state = ButtonState.DEFAULT;
+            this.label = label;
+            buttonTextures = new List<Texture2D>();
+            HitBox = new Rectangle((int)position.X, (int)position.Y, this.width, this.height);
+            SpriteBox = new Rectangle();
+            SpriteBox.Width = this.width;
+            SpriteBox.Height = this.height;
+            Vector2 textPostion = new Vector2(position.X + 40, position.Y + 5);
+            labelSprite = new SpriteText(textPostion, Color.White, label);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, this.HitBox, Color.White);
+            spriteBatch.Draw(texture, position, this.SpriteBox, Color.White);
             labelSprite.Draw(spriteBatch);
         }
 
         public void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("redPixel");
+            buttonTextures.Add(content.Load<Texture2D>("button"));
+            buttonTextures.Add(content.Load<Texture2D>("buttonPressed"));
+            texture = buttonTextures[0];
+        }
+
+        public void setState(ButtonState state)
+        {
+            this.state = state;
+            switch (state)
+            {
+                case ButtonState.DEFAULT:
+                    texture = buttonTextures[0];
+                break;
+                case ButtonState.HOVER:
+                texture = buttonTextures[1];
+                break;
+                case ButtonState.SELECTED:
+                texture = buttonTextures[1];
+                break;
+
+                default:
+                    throw new UnauthorizedAccessException();
+            }
         }
     }
 }

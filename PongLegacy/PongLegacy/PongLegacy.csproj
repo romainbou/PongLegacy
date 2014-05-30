@@ -88,7 +88,7 @@
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteText.cs" />
     <Compile Include="SpriteTexture2D.cs" />
-    <Compile Include="Start.cs" />
+    <Compile Include="Pause.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="Vector2D.cs" />
   </ItemGroup>
