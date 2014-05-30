@@ -65,12 +65,12 @@ namespace PongLegacy
             
             if(this.position.X <= 0)
             {
-                this.Pong.LeftTeam.Score++;
+                this.Pong.LeftTeam.Score.Value++;
                 return true;
             } 
             if (this.position.X >= this.Pong.Dimensions.X)
             {
-                this.Pong.RightTeam.Score++;
+                this.Pong.RightTeam.Score.Value++;
                 return true;
             }
             return false;

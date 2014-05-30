@@ -85,13 +85,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Pong.cs" />
+    <Compile Include="Score.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteText.cs" />
     <Compile Include="SpriteTexture2D.cs" />
     <Compile Include="Pause.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="Vector2D.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

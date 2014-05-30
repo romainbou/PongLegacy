@@ -21,7 +21,6 @@ namespace PongLegacy
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        KeyboardState keyboardState;
         MouseState mouseState;
         int MouseX, MouseY;
 
@@ -141,6 +140,10 @@ namespace PongLegacy
                         pause.addToDraw(Content);
                         this.ToDraw.Add(MiddleLine);
                         this.ToDraw.Add(this.Ball);
+                        this.LeftTeam.Score.LoadContent(Content, "55_Corbel");
+                        this.RightTeam.Score.LoadContent(Content, "55_Corbel");
+                        this.ToDraw.Add(this.LeftTeam.Score);
+                        this.ToDraw.Add(this.RightTeam.Score);
                         foreach (Player p in this.RightTeam.Players)
                         {
                             p.LoadContent(Content, p.Color);
