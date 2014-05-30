@@ -41,6 +41,8 @@ namespace PongLegacy
 
         public KeyboardState currentKBState;
         public KeyboardState previousKBState;
+        public MouseState previousMouseState;
+        public MouseState currentMouseState;
 
         public Pong()
         {
@@ -110,7 +112,8 @@ namespace PongLegacy
         {
             previousKBState = currentKBState;
             currentKBState = Keyboard.GetState();
-            mouseState = Mouse.GetState();
+            previousMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -121,7 +124,10 @@ namespace PongLegacy
                 case Conf.GameState.MENU:
                     // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
-                    menu.handleMouse(Content, mouseState);
+                  ////  if (currentMouseState.X != previousMouseState.X || currentMouseState.Y != currentMouseState.Y)
+                 //   {
+                        menu.handleMouse(Content, previousMouseState, currentMouseState);
+                 //   }
 
                     if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter))
                     {

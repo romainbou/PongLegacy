@@ -74,13 +74,13 @@ namespace PongLegacy
             }
         }
 
-        public void handleMouse(ContentManager Content, MouseState mouseState)
+        public void handleMouse(ContentManager Content, MouseState prevState, MouseState currentState)
         {
             foreach (Button currentButton in this.buttons)
             {
                 if (currentButton.state != Button.ButtonState.SELECTED)
                 {
-                    if (currentButton.HitBox.Contains(mouseState.X, mouseState.Y))
+                    if (currentButton.HitBox.Contains(currentState.X, currentState.Y))
                     {
                         if (currentButton.state != Button.ButtonState.HOVER)
                         {
