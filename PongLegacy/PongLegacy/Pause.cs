@@ -8,16 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PongLegacy
 {
-    public class Start
+    public class Pause
     {
         private Pong game;
         private List<Sprite> startSprites = new List<Sprite>();
 
-        public Start(Pong game)
+        public Pause(Pong game)
         {
             this.game = game;
 
-            startSprites.Add(new SpriteText(new Vector2(10,10), Color.White, "START - Press Enter to begin"));
+            startSprites.Add(new SpriteText(new Vector2(220,160), Color.White, "PAUSE - Press Space to begin"));
         }
 
         public void initialize()

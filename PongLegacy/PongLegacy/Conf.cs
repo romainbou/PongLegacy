@@ -20,6 +20,10 @@ namespace PongLegacy
         public const int WINDOW_HEIGHT = 600;
         public const int BACK_PLAYER_MARGIN = 50;
         public const int FRONT_PLAYER_MARGIN = 250;
+        public const int KEY_CONTROL_PICTURE_MARGIN_LEFT = BAT_WIDTH + 10;
+        public const int KEY_CONTROL_PICTURE_MARGIN_RIGHT = 40 + 10;
+        public const int KEY_CONTROL_PICTURE_MARGIN_TOP = (120 - BAT_HEIGHT)/2;
+        public const int MIDDLE_LINE_WIDTH = 2;
 
         public const int BUTTON_WIDTH = 100;
         public const int BUTTON_HEIGHT = 50;

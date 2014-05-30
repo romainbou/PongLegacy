@@ -23,6 +23,11 @@ namespace PongLegacy
         public Boolean isInIntersection { get; set; }
         public Boolean IsAccelerating { get; set; }
         public String Color { get; set; }
+        public SpriteTexture2D keySprite;
+        public String keyUp { get; set; }
+        public String keyDown { get; set; }
+
+
         public Player(Team team, Conf.PlayerPosition playerPosition, Conf.InteligenceType type) : base(Vector2.Zero,Conf.BAT_WIDTH,Conf.BAT_HEIGHT)
         {
             this.Team = team;
@@ -90,14 +95,20 @@ namespace PongLegacy
             {
                 if (this.PlayerPosition == Conf.PlayerPosition.BACK)
                 {
-                    this.position = new Vector2(Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
+                    this.position = new Vector2(Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2 - Conf.BAT_HEIGHT/2);
                     this.Controler = new KeyboardPlayerControler(Keys.A, Keys.Q,this);
+                    this.keyUp = "A";
+                    this.keyDown = "Q";
+                    this.keySprite = new SpriteTexture2D(new Vector2(Conf.BACK_PLAYER_MARGIN + Conf.KEY_CONTROL_PICTURE_MARGIN_LEFT, (Conf.WINDOW_HEIGHT / 2) - Conf.BAT_HEIGHT / 2 - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP), 40, 120);
                     this.Color = Conf.PlayerColor.BLUE;
                 }
                 else
                 {
-                    this.position = new Vector2(Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
+                    this.position = new Vector2(Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2 - Conf.BAT_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.F, Keys.V, this);
+                    this.keyUp = "F";
+                    this.keyDown = "V";
+                    this.keySprite = new SpriteTexture2D(new Vector2(Conf.FRONT_PLAYER_MARGIN + Conf.KEY_CONTROL_PICTURE_MARGIN_LEFT, (Conf.WINDOW_HEIGHT / 2) - Conf.BAT_HEIGHT / 2 - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP), 40, 120);
                     this.Color = Conf.PlayerColor.RED;
                 }
             }
@@ -105,14 +116,20 @@ namespace PongLegacy
             {
                 if (this.PlayerPosition == Conf.PlayerPosition.BACK)
                 {
-                    this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
+                    this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.BACK_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2 - Conf.BAT_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.Up, Keys.Down, this);
+                    this.keyUp = "Up";
+                    this.keyDown = "Down";
+                    this.keySprite = new SpriteTexture2D(new Vector2(Conf.WINDOW_WIDTH - Conf.BACK_PLAYER_MARGIN - Conf.KEY_CONTROL_PICTURE_MARGIN_RIGHT, (Conf.WINDOW_HEIGHT / 2) - Conf.BAT_HEIGHT / 2 - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP), 40, 120);
                     this.Color = Conf.PlayerColor.GREEN;
                 }
                 else
                 {
-                    this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2);
+                    this.position = new Vector2(Conf.WINDOW_WIDTH - Conf.FRONT_PLAYER_MARGIN, Conf.WINDOW_HEIGHT / 2 - Conf.BAT_HEIGHT / 2);
                     this.Controler = new KeyboardPlayerControler(Keys.J, Keys.N, this);
+                    this.keyUp = "J";
+                    this.keyDown = "N";
+                    this.keySprite = new SpriteTexture2D(new Vector2(Conf.WINDOW_WIDTH - Conf.FRONT_PLAYER_MARGIN - Conf.KEY_CONTROL_PICTURE_MARGIN_RIGHT, (Conf.WINDOW_HEIGHT / 2) - Conf.BAT_HEIGHT / 2 - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP), 40, 120);
                     this.Color = Conf.PlayerColor.YELLOW;
                 }
             }
