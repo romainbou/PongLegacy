@@ -50,15 +50,21 @@ namespace PongLegacy
 
             foreach (Player p in this.game.RightTeam.Players)
             {
-                p.keySprite.position = new Vector2(p.position.X - Conf.KEY_CONTROL_PICTURE_MARGIN_RIGHT, p.position.Y - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP);
-                p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
-                this.game.ToDraw.Add(p.keySprite);
+                if (p.Type != Conf.InteligenceType.IA)
+                {
+                    p.keySprite.position = new Vector2(p.position.X - Conf.KEY_CONTROL_PICTURE_MARGIN_RIGHT, p.position.Y - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP);
+                    p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
+                    this.game.ToDraw.Add(p.keySprite);
+                }
             } 
             foreach (Player p in this.game.LeftTeam.Players)
             {
-                p.keySprite.position = new Vector2(p.position.X + Conf.KEY_CONTROL_PICTURE_MARGIN_LEFT, p.position.Y - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP);
-                p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
-                this.game.ToDraw.Add(p.keySprite);
+                if (p.Type != Conf.InteligenceType.IA)
+                {
+                    p.keySprite.position = new Vector2(p.position.X + Conf.KEY_CONTROL_PICTURE_MARGIN_LEFT, p.position.Y - Conf.KEY_CONTROL_PICTURE_MARGIN_TOP);
+                    p.keySprite.LoadContent(Content, "key" + p.keyUp + p.keyDown);
+                    this.game.ToDraw.Add(p.keySprite);
+                }
             }
         }
 
