@@ -67,11 +67,21 @@ namespace PongLegacy
             if(this.position.X <= 0)
             {
                 this.Pong.RightTeam.Score.Value++;
+                if (this.Pong.RightTeam.Score.Value > Conf.SCORE_TO_WIN)
+                {
+                    this.Pong.win = new Win(this.Pong, Conf.TeamSide.RIGHT);
+                    this.Pong.GameState = Conf.GameState.END;
+                }
                 return true;
             } 
             if (this.position.X >= this.Pong.Dimensions.X)
             {
                 this.Pong.LeftTeam.Score.Value++;
+                if (this.Pong.LeftTeam.Score.Value > Conf.SCORE_TO_WIN)
+                {
+                    this.Pong.win = new Win(this.Pong, Conf.TeamSide.LEFT);
+                    this.Pong.GameState = Conf.GameState.END;
+                }
                 return true;
             }
             return false;

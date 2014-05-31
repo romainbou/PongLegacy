@@ -16,9 +16,9 @@ namespace PongLegacy
             get { return this._Value; }
         }
 
-        public Score(Vector2 position) : base(position, Color.White, 0.ToString())
+        public Score(Vector2 position) : base(position, Color.White, 1.ToString())
         {
-            this.Value = 0;
+            this.Value = 1;
         }
     }
 }

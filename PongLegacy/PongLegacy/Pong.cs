@@ -28,6 +28,7 @@ namespace PongLegacy
 
         public Menu menu;
         public Pause pause;
+        public Win win;
 
         public Team LeftTeam { get; set; }
         public Team RightTeam { get; set; }
@@ -168,6 +169,37 @@ namespace PongLegacy
                     break;
 
                 case Conf.GameState.END:
+                    this.win.LoadContent(Content);
+                    this.win.addToDraw(Content);
+                    if (currentKBState.IsKeyDown(Keys.M) && !previousKBState.IsKeyDown(Keys.M))
+                    {
+                        this.IsMouseVisible = true;
+                        this.ToDraw.Clear();
+                        this.menu = new Menu(this);
+                        menu.LoadContent(Content);
+                        this.GameState = Conf.GameState.MENU;
+                    }
+                    else if(currentKBState.IsKeyDown(Keys.R) && !previousKBState.IsKeyDown(Keys.R)) {
+                        this.ToDraw.Clear();
+                        this.menu.initializeGame();
+                        this.ToDraw.Add(MiddleLine);
+                        this.ToDraw.Add(this.Ball);
+                        this.LeftTeam.Score.LoadContent(Content, "55_Corbel");
+                        this.RightTeam.Score.LoadContent(Content, "55_Corbel");
+                        this.ToDraw.Add(this.LeftTeam.Score);
+                        this.ToDraw.Add(this.RightTeam.Score);
+                        foreach (Player p in this.RightTeam.Players)
+                        {
+                            p.LoadContent(Content, p.Color);
+                            this.ToDraw.Add(p);
+                        }
+                        foreach (Player p in this.LeftTeam.Players)
+                        {
+                            p.LoadContent(Content, p.Color);
+                            this.ToDraw.Add(p);
+                        }
+                        this.GameState = Conf.GameState.PLAY;
+                    }
                     break;
 
                 default:

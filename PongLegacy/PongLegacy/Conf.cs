@@ -29,6 +29,7 @@ namespace PongLegacy
         public const int KEY_CONTROL_PICTURE_MARGIN_RIGHT = 40 + 10;
         public const int KEY_CONTROL_PICTURE_MARGIN_TOP = (120 - BAT_HEIGHT)/2;
         public const int MIDDLE_LINE_WIDTH = 2;
+        public const int SCORE_TO_WIN = 10;
 
         public const int BUTTON_WIDTH = 250;
         public const int BUTTON_HEIGHT = 70;
