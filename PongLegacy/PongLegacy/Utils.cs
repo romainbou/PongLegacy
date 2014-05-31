@@ -15,5 +15,12 @@ namespace PongLegacy
             returned.Y = (int)(vector.Y * Math.Cos(angle) + vector.X * Math.Sin(angle));
             return returned;
         }
+        public class VECTORS
+        {
+            public static Vector2 FIRSTQUAD = new Vector2((float)(1 / Math.Sqrt(2)), (float)(1 / Math.Sqrt(2)));
+            public static Vector2 SECONDQUAD = new Vector2((float)(-1 / Math.Sqrt(2)), (float)(1 / Math.Sqrt(2)));
+            public static Vector2 THIRDQUAD = new Vector2((float)(-1 / Math.Sqrt(2)), (float)(-1 / Math.Sqrt(2)));
+            public static Vector2 FOURTHQUAD = new Vector2((float)(1 / Math.Sqrt(2)), (float)(-1 / Math.Sqrt(2)));
+        }
     }
 }

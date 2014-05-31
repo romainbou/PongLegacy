@@ -15,10 +15,12 @@ namespace PongLegacy
         public Rectangle HitBox;
         public float Acceleration { get; set; }
         public Pong Pong { get; set; }
+        public Boolean IsInWall { get; set; }
         
 
         public Ball(Pong pong): base(new Vector2(pong.Dimensions.X / 2 - Ball.Radius/2, pong.Dimensions.Y / 2  - Ball.Radius/2 ), Ball.Radius, Ball.Radius)
         {
+            this.IsInWall = false;
             this.Acceleration = .2f;
             this.Pong = pong;
             this.ResetBall();
@@ -51,7 +53,6 @@ namespace PongLegacy
                 {
                     this.CheckPlayerColision(player);
                 }
-                Console.WriteLine(this.position.X);
                 this.position = new Vector2(this.position.X + this.Speed.X, this.position.Y + this.Speed.Y);
             }
             else
@@ -101,7 +102,7 @@ namespace PongLegacy
                     final.Y = (int)((vector.Y * Math.Cos(coef * angle) + vector.X * Math.Sin(coef * angle)));
                 }
                 this.Speed = final;
-                
+                this.correctSpeed();
                 player.isInIntersection = true;
                 return true;
             }
@@ -111,12 +112,16 @@ namespace PongLegacy
         }
         public Boolean CheckWallColision()
         {
-            if (this.position.Y <= 0 || this.position.Y >= this.Pong.Dimensions.Y-Ball.Radius)
+            if (this.position.Y <= 0 && !this.IsInWall || this.position.Y >= this.Pong.Dimensions.Y - Ball.Radius && !this.IsInWall)
             {
-                
+                this.IsInWall = true;
                 this.Speed = new Vector2(this.Speed.X, -this.Speed.Y);
                 
                 return true;
+            }
+            else if (this.position.Y > 0 && this.position.Y < this.Pong.Dimensions.Y - Ball.Radius )
+            {
+                this.IsInWall = false;
             }
             return false;
         }
@@ -124,49 +129,54 @@ namespace PongLegacy
         {
             this.position = new Vector2(this.Pong.Dimensions.X / 2 - Ball.Radius / 2, this.Pong.Dimensions.Y / 2 - Ball.Radius / 2);
             Random random = new Random();
-            int X = -5;//(int)(5*(Math.Cos(2*Math.PI*random.NextDouble())));
-            int Y = 0;//(int)(2*(Math.Sin(2*Math.PI*random.NextDouble())));
+            int factor = random.Next(2);
+            int X = (factor*14)  -7;
+            int Y = 0;
             this.Speed = new Vector2(X, Y);
         }
         private void correctSpeed()
         {
             Double angle = Math.Atan2(this.Speed.Y, this.Speed.X);
             Double max, rotateAngle;
-
+            Vector2 newSpeed ;
             if (this.Speed.X > 0)
             {
-                if (this.Speed.Y > 0)
+                if (this.Speed.Y < 0)
                 {
-                    max = Math.PI / 4;
-
+                    max = -Math.PI / 4;
+                    newSpeed = Utils.VECTORS.FOURTHQUAD;
+                    rotateAngle = max - angle;
                 }
                 else
                 {
-                    max = 7 * Math.PI / 4;
-
+                    max = Math.PI / 4;
+    
+                    newSpeed = Utils.VECTORS.FIRSTQUAD;
+                    rotateAngle = angle-max;
                 }
             }
             else
             {
-                if (this.Speed.Y > 0)
+                if (this.Speed.Y < 0)
                 {
-                    max = 3 * Math.PI / 4;
-
+                    max = -3*Math.PI / 4;
+                    newSpeed = Utils.VECTORS.THIRDQUAD;
+                    rotateAngle = angle-max;
                 }
                 else
                 {
-                    max = 5 * Math.PI / 4;
-
+                    max = 3 * Math.PI / 4;
+                    newSpeed = Utils.VECTORS.SECONDQUAD;
+                    rotateAngle = max - angle;
                 }
             }
-            rotateAngle = max - angle;
-            Console.WriteLine(180 * angle / Math.PI);
-            if (rotateAngle < 0)
+
+            
+            if (rotateAngle> 0)
             {
-                Vector2 newSpeed = Utils.rotate(rotateAngle, this.Speed);
+                newSpeed.X = newSpeed.X * this.Speed.Length();
+                newSpeed.Y = newSpeed.Y * this.Speed.Length();
                 this.Speed = newSpeed;
-                angle = Math.Atan2(this.Speed.Y, this.Speed.X);
-                
             }
 
         }
