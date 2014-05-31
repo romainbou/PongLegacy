@@ -21,16 +21,13 @@ namespace PongLegacy
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        KeyboardState keyboardState;
-        MouseState mouseState;
-        int MouseX, MouseY;
 
         public List<Sprite> ToDraw { get; set; }
 
         public Vector2 Dimensions { get; set; }
 
         public Menu menu;
-        public Pause start;
+        public Pause pause;
 
         public Team LeftTeam { get; set; }
         public Team RightTeam { get; set; }
@@ -41,6 +38,8 @@ namespace PongLegacy
 
         public KeyboardState currentKBState;
         public KeyboardState previousKBState;
+        public MouseState previousMouseState;
+        public MouseState currentMouseState;
 
         public Pong()
         {
@@ -66,7 +65,7 @@ namespace PongLegacy
             this.IsMouseVisible = true;
             this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
             menu = new Menu(this);
-            start = new Pause(this);
+            pause = new Pause(this);
 
             this.Ball = new Ball(this);
             this.MiddleLine = new MiddleLine(Window.ClientBounds.Width, Window.ClientBounds.Height);
@@ -86,7 +85,7 @@ namespace PongLegacy
             // Instanciate the Sprite List
 
             menu.LoadContent(Content);
-            start.LoadContent(Content);
+            pause.LoadContent(Content);
             this.ToDraw = new List<Sprite>();
             this.Ball.LoadContent(Content, "ball");
             this.MiddleLine.LoadContent(Content, "whitePixel");
@@ -110,7 +109,8 @@ namespace PongLegacy
         {
             previousKBState = currentKBState;
             currentKBState = Keyboard.GetState();
-            mouseState = Mouse.GetState();
+            previousMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -119,33 +119,20 @@ namespace PongLegacy
             switch (GameState)
             {
                 case Conf.GameState.MENU:
-                    // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
-                    menu.handleMouse(Content, mouseState);
-
-                    if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter))
+                    if (previousMouseState.X != currentMouseState.X || previousMouseState.Y != currentMouseState.Y)
                     {
-                        this.IsMouseVisible = false;
-                        this.ToDraw.Clear();
+                        menu.handleMouse(currentMouseState);
+                    }
+                    if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
+                    {
+                        menu.onClick();
+                    }
 
-                        //@todo mettre dans le menu au clique sur le bouton go avec les bons parametres
-                        this.LeftTeam = new Team(Conf.TeamSide.LEFT, 1, Conf.InteligenceType.HUMAN, this);
-                        this.RightTeam = new Team(Conf.TeamSide.RIGHT, 1, Conf.InteligenceType.IA, this);
-
-                        start.addToDraw(Content);
-                        this.ToDraw.Add(MiddleLine);
-                        this.ToDraw.Add(this.Ball);
-                        foreach (Player p in this.RightTeam.Players)
-                        {
-                            p.LoadContent(Content, p.Color);
-                            this.ToDraw.Add(p);
-                        } 
-                        foreach (Player p in this.LeftTeam.Players)
-                        {
-                            p.LoadContent(Content, p.Color);
-                            this.ToDraw.Add(p);
-                        }
-                        this.GameState = Conf.GameState.PAUSE;
+                    if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter) && menu.areChoicesMade())
+                    {
+                        menu.initializeGame();
+                        this.startGame();
                     }
                     break;
 
@@ -153,7 +140,7 @@ namespace PongLegacy
 
                     if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
-                        this.start.removeToDraw();
+                        this.pause.removeToDraw();
                         this.GameState = Conf.GameState.PLAY;
                     }
                     break;
@@ -161,7 +148,7 @@ namespace PongLegacy
                 case Conf.GameState.PLAY:
                     if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
-                        this.start.addToDraw(Content);
+                        this.pause.addToDraw(Content);
                         this.GameState = Conf.GameState.PAUSE;
                     }
                     else
@@ -206,6 +193,29 @@ namespace PongLegacy
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void startGame()
+        {
+            this.ToDraw.Clear();
+            pause.addToDraw(Content);
+            this.ToDraw.Add(MiddleLine);
+            this.ToDraw.Add(this.Ball);
+            this.LeftTeam.Score.LoadContent(Content, "55_Corbel");
+            this.RightTeam.Score.LoadContent(Content, "55_Corbel");
+            this.ToDraw.Add(this.LeftTeam.Score);
+            this.ToDraw.Add(this.RightTeam.Score);
+            foreach (Player p in this.RightTeam.Players)
+            {
+                p.LoadContent(Content, p.Color);
+                this.ToDraw.Add(p);
+            }
+            foreach (Player p in this.LeftTeam.Players)
+            {
+                p.LoadContent(Content, p.Color);
+                this.ToDraw.Add(p);
+            }
+            this.GameState = Conf.GameState.PAUSE;
         }
     }
 }

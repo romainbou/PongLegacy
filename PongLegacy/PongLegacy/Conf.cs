@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,13 +10,17 @@ namespace PongLegacy
     {
 
         public const String GAME_NAME = "PONG LEGACY";
+        public const String PAUSE_NAME = "PAUSE - Press Space to continue";
         public const String DEFAULT_FONT = "35_Corbel";
 
         public const int BAT_WIDTH = 12;
-        public const int BAT_HEIGHT = 70;
+        public const int BAT_HEIGHT = 80;
         public const int PLAYER_ACC = 1;
         public const int PLAYER_INIT_SPEED = 2;
         public const int PLAYER_MAX_SPEED = 12;
+        public const int TEAM_LEFT_SCORE_POSITION_X = WINDOW_WIDTH / 2 - 120;
+        public const int TEAM_RIGHT_SCORE_POSITION_X = WINDOW_WIDTH / 2 + 20;
+        public const int TEAM_SCORE_POSITION_Y = 5;
         public const int WINDOW_WIDTH = 1000;
         public const int WINDOW_HEIGHT = 600;
         public const int BACK_PLAYER_MARGIN = 50;

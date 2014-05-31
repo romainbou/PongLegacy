@@ -10,13 +10,20 @@ namespace PongLegacy
     {
         public Conf.TeamSide Side { get; set; }
         public List<Player> Players { get; set; }
-        public int Score { get; set; }
+        public Score Score { get; set; }
         public Pong Pong { get; set; }
 
         public Team(Conf.TeamSide side,int nbPlayer, Conf.InteligenceType type, Pong pong)
         {
             this.Players = new List<Player>();
-            this.Score = 0;
+            if (side == Conf.TeamSide.LEFT)
+            {
+                this.Score = new Score(new Vector2(Conf.TEAM_LEFT_SCORE_POSITION_X, Conf.TEAM_SCORE_POSITION_Y));
+            }
+            else
+            {
+                this.Score = new Score(new Vector2(Conf.TEAM_RIGHT_SCORE_POSITION_X, Conf.TEAM_SCORE_POSITION_Y));
+            }
             this.Pong = pong;
             this.Side = side;
             this.Players.Add(new Player(this, Conf.PlayerPosition.BACK, type));

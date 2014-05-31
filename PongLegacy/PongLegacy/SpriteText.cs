@@ -25,7 +25,6 @@ namespace PongLegacy
             this.text = text;
         }
 
-
         public override void LoadContent(ContentManager content, string assetName)
         {
             font = content.Load<SpriteFont>(assetName);
