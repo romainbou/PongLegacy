@@ -94,7 +94,7 @@ namespace PongLegacy
             }
         }
 
-        public void handleMouse(ContentManager Content, MouseState prevState, MouseState currentState)
+        public void handleMouse(MouseState currentState)
         {
             foreach (Button currentButton in this.buttons)
             {
@@ -120,41 +120,43 @@ namespace PongLegacy
 
         public void onClick()
         {
+            Button hoveredButton = null;
             foreach (Button currentButton in this.buttons)
             {
                 if (currentButton.state == Button.ButtonState.HOVER)
                 {
-                    if (currentButton == buttons.Last())
-                    {
-                        if (areChoicesMade())
-                        {
-                            initializeGame();
-                            game.startGame();
-                        }
-                    }
-                    if (leftChoices.Contains(currentButton))
-                    {
-                        foreach (Button currentSideButton in leftChoices)
-                        {
-                            if (currentButton != currentSideButton)
-                            {
-                                currentSideButton.setState(Button.ButtonState.DEFAULT);
-                            }
-                        }
-                    }
-                    if (rightChoices.Contains(currentButton))
-                    {
-                        foreach (Button currentSideButton in rightChoices)
-                        {
-                            if (currentButton != currentSideButton)
-                            {
-                                currentSideButton.setState(Button.ButtonState.DEFAULT);
-                            }
-                        }
-                    }
-                    currentButton.setState(Button.ButtonState.SELECTED);
+                    hoveredButton = currentButton;
+                    break;
                 }
             }
+
+            // Hovered button == GO && buttons are selected
+            if (hoveredButton == buttons.Last() && areChoicesMade())
+            {
+                initializeGame();
+                game.startGame();
+            }
+            if (leftChoices.Contains(hoveredButton))
+            {
+                foreach (Button currentSideButton in leftChoices)
+                {
+                    if (hoveredButton != currentSideButton)
+                    {
+                        currentSideButton.setState(Button.ButtonState.DEFAULT);
+                    }
+                }
+            }
+            if (rightChoices.Contains(hoveredButton))
+            {
+                foreach (Button currentSideButton in rightChoices)
+                {
+                    if (hoveredButton != currentSideButton)
+                    {
+                        currentSideButton.setState(Button.ButtonState.DEFAULT);
+                    }
+                }
+            }
+            hoveredButton.setState(Button.ButtonState.SELECTED);
         }
         public bool isOneChoiceSelected(List<Button> buttonList){
             foreach (Button currentButton in buttonList){

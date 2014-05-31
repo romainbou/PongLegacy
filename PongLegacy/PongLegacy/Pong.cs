@@ -21,8 +21,6 @@ namespace PongLegacy
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        MouseState mouseState;
-        int MouseX, MouseY;
 
         public List<Sprite> ToDraw { get; set; }
 
@@ -121,16 +119,15 @@ namespace PongLegacy
             switch (GameState)
             {
                 case Conf.GameState.MENU:
-                    // TODO: Menu adds its sprits to toDraw
                     menu.addToDraw();
-                  ////  if (currentMouseState.X != previousMouseState.X || currentMouseState.Y != currentMouseState.Y)
-                 //   {
-                        menu.handleMouse(Content, previousMouseState, currentMouseState);
-                 //   }
-                        if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
-                        {
-                            menu.onClick();
-                        }
+                    if (previousMouseState.X != currentMouseState.X || previousMouseState.Y != currentMouseState.Y)
+                    {
+                        menu.handleMouse(currentMouseState);
+                    }
+                    if (previousMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
+                    {
+                        menu.onClick();
+                    }
 
                     if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter) && menu.areChoicesMade())
                     {
