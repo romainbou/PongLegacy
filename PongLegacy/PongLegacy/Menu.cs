@@ -26,20 +26,27 @@ namespace PongLegacy
             rightChoices = new List<Button>();
             menuSprites = new List<Sprite>();
 
-            buttons.Add(new Button(new Vector2(130, 200), "1 player", 1, Conf.InteligenceType.HUMAN));
+            int leftButtonsPositionX = (Conf.WINDOW_WIDTH/2 - Conf.BUTTON_WIDTH)/2;
+            //leftButtonsPositionX += leftButtonsPositionX/2
+            int rightButtonsPositionX = (Conf.WINDOW_WIDTH / 2) + leftButtonsPositionX;
+            
+            Vector2 leftButtonsPosition = new Vector2(leftButtonsPositionX, 200);
+
+
+            buttons.Add(new Button(leftButtonsPosition, "1 player", 1, Conf.InteligenceType.HUMAN));
             leftChoices.Add(buttons.Last());
-            buttons.Add(new Button(new Vector2(130, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
+            buttons.Add(new Button(new Vector2(leftButtonsPositionX, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
             leftChoices.Add(buttons.Last());
-            buttons.Add(new Button(new Vector2(130, 400), "AI", 1, Conf.InteligenceType.IA));
+            buttons.Add(new Button(new Vector2(leftButtonsPositionX, 400), "AI", 1, Conf.InteligenceType.IA));
             leftChoices.Add(buttons.Last());
-            buttons.Add(new Button(new Vector2(630, 200), "1 player", 1, Conf.InteligenceType.HUMAN));
+            buttons.Add(new Button(new Vector2(rightButtonsPositionX, 200), "1 player", 1, Conf.InteligenceType.HUMAN));
             rightChoices.Add(buttons.Last());
-            buttons.Add(new Button(new Vector2(630, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
+            buttons.Add(new Button(new Vector2(rightButtonsPositionX, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
             rightChoices.Add(buttons.Last());
-            buttons.Add(new Button(new Vector2(630, 400), "AI", 1, Conf.InteligenceType.IA));
+            buttons.Add(new Button(new Vector2(rightButtonsPositionX, 400), "AI", 1, Conf.InteligenceType.IA));
             rightChoices.Add(buttons.Last());
 
-            buttons.Add(new Button(new Vector2(370, 500), "GO !"));
+            buttons.Add(new Button(new Vector2(375, 500), "GO !"));
 
             foreach (Button button in buttons)
             {
@@ -47,8 +54,10 @@ namespace PongLegacy
                 menuSprites.Add(button.labelSprite);
             }
 
-            SpriteText leftTeamLabel = new SpriteText(new Vector2(100, 40), Color.White, "Left Side");
-            SpriteText rightTeamLabel = new SpriteText(new Vector2(600, 40), Color.White, "Right Side");
+            SpriteText title = new SpriteText(new Vector2(350, 20), Color.White, "PONG LEGACY");
+            SpriteText leftTeamLabel = new SpriteText(new Vector2(145, 110), Color.White, "Left Side");
+            SpriteText rightTeamLabel = new SpriteText(new Vector2(640, 110), Color.White, "Right Side");
+            menuSprites.Add(title);
             menuSprites.Add(leftTeamLabel);
             menuSprites.Add(rightTeamLabel);
         }
