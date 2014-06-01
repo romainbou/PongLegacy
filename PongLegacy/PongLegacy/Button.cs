@@ -63,10 +63,10 @@ namespace PongLegacy
                     texture = buttonTextures[0];
                 break;
                 case ButtonState.HOVER:
-                texture = buttonTextures[1];
+                    texture = buttonTextures[1];
                 break;
                 case ButtonState.SELECTED:
-                texture = buttonTextures[2];
+                    texture = buttonTextures[2];
                 break;
 
                 default:
