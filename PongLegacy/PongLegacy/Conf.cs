@@ -9,6 +9,8 @@ namespace PongLegacy
     public static class Conf
     {
 
+        //Constantes du jeu
+
         public const String GAME_NAME = "PONG LEGACY";
         public const String PAUSE_NAME = "PAUSE - Press Space to continue";
         public const String PAUSE_INSTRUCTIONS = "Press M to exit and return to menu";

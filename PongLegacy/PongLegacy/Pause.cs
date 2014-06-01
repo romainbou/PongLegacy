@@ -13,6 +13,7 @@ namespace PongLegacy
         private Pong game;
         private List<Sprite> startSprites = new List<Sprite>();
 
+        //Elements graphiques nécessaires au mode pause initialisés
         public Pause(Pong game)
         {
             this.game = game;
@@ -26,6 +27,7 @@ namespace PongLegacy
 
         }
 
+        //Chargement des contenus graphiques nécessaires à l'affichage
         public void LoadContent(ContentManager content)
         {
             foreach (Sprite sprite in startSprites)
@@ -42,6 +44,7 @@ namespace PongLegacy
             }
         }
 
+        // Ajout des éléments Sprite dans la liste qui sera affichée à l'écran en mode Pause
         public void addToDraw(ContentManager Content)
         {
             foreach (Sprite sprite in startSprites)
@@ -49,6 +52,7 @@ namespace PongLegacy
                 game.ToDraw.Add(sprite);
             }
 
+            //Parcours des joueurs pour afficher les instructions de contrôle pour chacun d'entre eux
             foreach (Player p in this.game.RightTeam.Players)
             {
                 if (p.Type != Conf.InteligenceType.IA)
@@ -69,6 +73,7 @@ namespace PongLegacy
             }
         }
 
+        //Suppression des éléments Sprite de la liste du Modèle (utiliser pour sortir du mode Pause)
         public void removeToDraw()
         {
             foreach (Sprite sprite in startSprites)

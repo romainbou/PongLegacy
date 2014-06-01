@@ -18,7 +18,8 @@ namespace PongLegacy
 
         public List<Button> leftChoices;
         public List<Button> rightChoices;
-
+        
+        //Définition des éléments nécessaire à la création graphique du menu
         public Menu(Pong game)
         {
             this.game = game;
@@ -68,6 +69,7 @@ namespace PongLegacy
             
         }
 
+        //Chargement des Sprites du menu à la volée
         public void LoadContent(ContentManager content)
         {
             this.title.LoadContent(content, "ponglegacy");
@@ -80,6 +82,7 @@ namespace PongLegacy
             }
         }
 
+        //Ajout des élements à ajouter à la liste qui sera affichée à l'écran
         public void addToDraw()
         {
             foreach (Sprite sprite in menuSprites)
@@ -88,6 +91,7 @@ namespace PongLegacy
             }
         }
 
+        //Suppression des élements de la liste qui sera affichée à l'écran
         public void removeToDraw()
         {
             foreach (Sprite sprite in menuSprites)
@@ -96,6 +100,7 @@ namespace PongLegacy
             }
         }
 
+        //Vérification des contrôles de la souris par rapport à l'état de celle-ci
         public void handleMouse(MouseState currentState)
         {
             foreach (Button currentButton in this.buttons)
@@ -120,6 +125,7 @@ namespace PongLegacy
             }
         }
 
+        // Au clique, passage du bouton en HOVER, ou DEFAULT
         public void onClick()
         {
             Button hoveredButton = null;
@@ -181,6 +187,7 @@ namespace PongLegacy
             return false;
         }
 
+        //Initialisation du jeu suite au choix effectué dans le menu pour instancié les équipes et joueurs à créer
         public void initializeGame(){
             game.IsMouseVisible = false;
             Team teamLeft = null;

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace PongLegacy
 {
+    //Classe permettant d'écrire du texte
     public class SpriteText : Sprite, IAutoLoadable
     {
         private SpriteFont font { get; set; }

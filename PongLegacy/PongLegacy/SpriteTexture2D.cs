@@ -8,6 +8,7 @@ using System.Text;
 
 namespace PongLegacy
 {
+    //Classe permettant de charger et afficher une image
     public class SpriteTexture2D : Sprite
     {
         public Texture2D texture { get; set; }

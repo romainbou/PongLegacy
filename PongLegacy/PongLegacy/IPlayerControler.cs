@@ -5,6 +5,7 @@ using System.Text;
 
 namespace PongLegacy
 {
+    //Classe abstraite de contrôle d'un joueur
     public abstract class IPlayerControler
     {
         public Player Player { get; set; }

@@ -14,6 +14,7 @@ namespace PongLegacy
         private Conf.TeamSide teamWin;
         private List<Sprite> winSprites = new List<Sprite>();
 
+        //Elements graphiques nécessaires au mode WIN initialisés
         public Win(Pong game, Conf.TeamSide teamSide)
         {
             this.game = game;
@@ -30,6 +31,7 @@ namespace PongLegacy
 
         }
 
+        //Chargement des contenus graphiques nécessaires à l'affichage
         public void LoadContent(ContentManager content)
         {
             foreach (Sprite sprite in winSprites)
@@ -46,6 +48,7 @@ namespace PongLegacy
             }
         }
 
+        // Ajout des éléments Sprite dans la liste qui sera affichée à l'écran en mode Pause
         public void addToDraw(ContentManager Content)
         {
             foreach (Sprite sprite in winSprites)
@@ -54,6 +57,7 @@ namespace PongLegacy
             }
         }
 
+        //Suppression des éléments Sprite de la liste du Modèle (utiliser pour sortir du mode Pause)
         public void removeToDraw()
         {
             foreach (Sprite sprite in winSprites)

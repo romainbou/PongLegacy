@@ -28,6 +28,7 @@ namespace PongLegacy
             
 
         }
+        // Set HitBox en fonction de la taille et de la position de la balle
         private void setHitBox()
         {
             this.HitBox = new Rectangle();
@@ -37,13 +38,15 @@ namespace PongLegacy
             this.HitBox.Y = (int)this.position.Y;
         }
 
+        //Méthode appelée à chaque boucle de jeu
         public void Update()
         {
             this.setHitBox();
             
+            // Si la balle ne sort pas de la zone de jeu
             if (!this.IsOut())
             {
-                
+                // Vérification des collisions et on définit la nouvelle position de la balle
                 this.CheckWallColision();
                 foreach (Player player in this.Pong.LeftTeam.Players)
                 {
@@ -57,26 +60,32 @@ namespace PongLegacy
             }
             else
             {
+                //Remise de la balle au centre
                 this.ResetBall();
             }
         }
 
         public Boolean IsOut()
         {
-            
+            //Si la balle est sortie du côté gauche
             if(this.position.X <= 0)
             {
+                //On incrémente les points à l'équipe de gauche
                 this.Pong.RightTeam.Score.Value++;
+                //Vérification si c'est la fin de partie
                 if (this.Pong.RightTeam.Score.Value > Conf.SCORE_TO_WIN)
                 {
                     this.Pong.win = new Win(this.Pong, Conf.TeamSide.RIGHT);
                     this.Pong.GameState = Conf.GameState.END;
                 }
                 return true;
-            } 
+            }
+            // Si la balle est sortie du côté droit
             if (this.position.X >= this.Pong.Dimensions.X)
             {
+                //On incrémente les points à l'équipe de droite
                 this.Pong.LeftTeam.Score.Value++;
+                //Vérification si c'est la fin de partie
                 if (this.Pong.LeftTeam.Score.Value > Conf.SCORE_TO_WIN)
                 {
                     this.Pong.win = new Win(this.Pong, Conf.TeamSide.LEFT);
@@ -86,6 +95,8 @@ namespace PongLegacy
             }
             return false;
         }
+
+        //Vérification de la collision entre la balle et un joueur
         public Boolean CheckPlayerColision(Player player)
         {
             if (!this.HitBox.Intersects(player.HitBox))

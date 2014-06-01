@@ -8,6 +8,8 @@ using System.Text;
 
 namespace PongLegacy
 {
+    //Définition d'un bouton du menu
+
     public class Button : SpriteTexture2D, IAutoLoadable
     {
 
@@ -40,12 +42,14 @@ namespace PongLegacy
             this.intelligenceType = intelligenceType;
         }
 
+        //Override méthode de dessin d'un bouton
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, this.SpriteBox, Color.White);
             labelSprite.Draw(spriteBatch);
         }
 
+        //Chargement du contenu nécessaire à l'affichage d'un bouton
         public void LoadContent(ContentManager content)
         {
             buttonTextures.Add(content.Load<Texture2D>("button"));
@@ -54,6 +58,7 @@ namespace PongLegacy
             texture = buttonTextures[0];
         }
 
+        //Modification de l'état d'un bouton (Default, hover, selected)
         public void setState(ButtonState state)
         {
             this.state = state;

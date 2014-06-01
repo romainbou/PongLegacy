@@ -27,7 +27,7 @@ namespace PongLegacy
         public String keyUp { get; set; }
         public String keyDown { get; set; }
 
-
+        // Initilisation d'un joueur
         public Player(Team team, Conf.PlayerPosition playerPosition, Conf.InteligenceType type) : base(Vector2.Zero,Conf.BAT_WIDTH,Conf.BAT_HEIGHT)
         {
             this.Team = team;
@@ -45,7 +45,6 @@ namespace PongLegacy
 
 
         }
-
         
         public void Update()
         {

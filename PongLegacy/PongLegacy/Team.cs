@@ -13,6 +13,7 @@ namespace PongLegacy
         public Score Score { get; set; }
         public Pong Pong { get; set; }
 
+        //Initialisation d'une équipe
         public Team(Conf.TeamSide side,int nbPlayer, Conf.InteligenceType type, Pong pong)
         {
             this.Players = new List<Player>();

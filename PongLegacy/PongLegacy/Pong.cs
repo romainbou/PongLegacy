@@ -42,6 +42,7 @@ namespace PongLegacy
         public MouseState previousMouseState;
         public MouseState currentMouseState;
 
+        //Initialisation des éléments nécessaires à XNA
         public Pong()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -51,7 +52,6 @@ namespace PongLegacy
 
             Content.RootDirectory = "Content";
             GameState = Conf.GameState.MENU;
-            // TODO: instanciate menu
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace PongLegacy
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Initialize (instanciate) Menu, start/play, end
+            //Initialisation des éléments du jeu
             this.IsMouseVisible = true;
             this.Dimensions = new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height);
             menu = new Menu(this);
@@ -98,7 +98,7 @@ namespace PongLegacy
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -108,6 +108,7 @@ namespace PongLegacy
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            //Récupération de l'état courant de la souris et du clavier
             previousKBState = currentKBState;
             currentKBState = Keyboard.GetState();
             previousMouseState = currentMouseState;
@@ -117,7 +118,7 @@ namespace PongLegacy
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            switch (GameState)
+            switch (GameState) //Switch des différents état du jeu
             {
                 case Conf.GameState.MENU:
                     menu.addToDraw();
@@ -130,6 +131,7 @@ namespace PongLegacy
                         menu.onClick();
                     }
 
+                    // Fin de la configuration du jeu, on débute le jeu
                     if (currentKBState.IsKeyDown(Keys.Enter) && !previousKBState.IsKeyDown(Keys.Enter) && menu.areChoicesMade())
                     {
                         menu.initializeGame();
@@ -139,11 +141,13 @@ namespace PongLegacy
 
                 case Conf.GameState.PAUSE:
 
+                    //Si on clique sur la barre espace on passe en mode PLAY
                     if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
                         this.pause.removeToDraw();
                         this.GameState = Conf.GameState.PLAY;
                     }
+                    // Si on clique sur M on passe en mode MENU
                     else if (currentKBState.IsKeyDown(Keys.M) && !previousKBState.IsKeyDown(Keys.M))
                     {
                         this.IsMouseVisible = true;
@@ -155,6 +159,7 @@ namespace PongLegacy
                     break;
 
                 case Conf.GameState.PLAY:
+                    //Si on clique sur la barre espace on passe en mode PAUSE
                     if (currentKBState.IsKeyDown(Keys.Space) && !previousKBState.IsKeyDown(Keys.Space))
                     {
                         this.pause.addToDraw(Content);
@@ -162,6 +167,7 @@ namespace PongLegacy
                     }
                     else
                     {
+                        //On met à jour graphiquement les raquettes des joueurs en fonction des contrôles reçus et on fait avancer la balle
                         foreach (Player p in this.RightTeam.Players)
                         {
                             p.Update();
@@ -176,9 +182,11 @@ namespace PongLegacy
                     }
                     break;
 
-                case Conf.GameState.END:
+                case Conf.GameState.END: //Etat final du jeu
                     this.win.LoadContent(Content);
                     this.win.addToDraw(Content);
+
+                    //Si on clique sur M on passe en mode MENU
                     if (currentKBState.IsKeyDown(Keys.M) && !previousKBState.IsKeyDown(Keys.M))
                     {
                         this.IsMouseVisible = true;
@@ -187,6 +195,7 @@ namespace PongLegacy
                         menu.LoadContent(Content);
                         this.GameState = Conf.GameState.MENU;
                     }
+                    //Si on clique sur R on réinitilise le jeu et on passe en mode PLAY
                     else if(currentKBState.IsKeyDown(Keys.R) && !previousKBState.IsKeyDown(Keys.R)) {
                         this.ToDraw.Clear();
                         this.menu.initializeGame();

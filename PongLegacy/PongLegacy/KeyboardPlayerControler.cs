@@ -24,6 +24,7 @@ namespace PongLegacy
             
         }
 
+        //Mouvement du joueur vers le haut ou le bas en fonction du contrôle clavier
         public override void Update()
         {
             this.Player.IsAccelerating = false;

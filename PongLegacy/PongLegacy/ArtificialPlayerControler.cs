@@ -12,6 +12,7 @@ namespace PongLegacy
         {
             this.Player.IsAccelerating = true;
         }
+
         public override void MoveUp()
         {
             this.Player.IsAccelerating = true;
@@ -22,6 +23,8 @@ namespace PongLegacy
             this.Player.IsAccelerating = true;
             this.Player.MoveDown();
         }
+
+        //Mouvement automatique du joueur vers le haut ou le bas en fonction de la position de la balle.
         public override void Update()
         {
             if (this.Player.position.Y + Conf.BAT_HEIGHT / 2 < this.Player.Team.Pong.Ball.position.Y - 20)
