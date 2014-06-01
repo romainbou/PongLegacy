@@ -12,6 +12,7 @@ namespace PongLegacy
     public class Menu
     {
         private Pong game;
+        public SpriteTexture2D title;
         public List<Sprite> menuSprites { get; set; }
         public List<Button> buttons { get; set;}
 
@@ -54,7 +55,7 @@ namespace PongLegacy
                 menuSprites.Add(button.labelSprite);
             }
 
-            SpriteText title = new SpriteText(new Vector2(350, 20), Color.White, "PONG LEGACY");
+            title = new SpriteTexture2D(new Vector2(350, 20), 300, 75);
             SpriteText leftTeamLabel = new SpriteText(new Vector2(145, 110), Color.White, "Left Side");
             SpriteText rightTeamLabel = new SpriteText(new Vector2(640, 110), Color.White, "Right Side");
             menuSprites.Add(title);
@@ -69,6 +70,7 @@ namespace PongLegacy
 
         public void LoadContent(ContentManager content)
         {
+            this.title.LoadContent(content, "ponglegacy");
             foreach (Sprite sprite in menuSprites)
             {
                 if(sprite is IAutoLoadable){

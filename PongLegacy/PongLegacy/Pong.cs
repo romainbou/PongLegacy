@@ -144,6 +144,14 @@ namespace PongLegacy
                         this.pause.removeToDraw();
                         this.GameState = Conf.GameState.PLAY;
                     }
+                    else if (currentKBState.IsKeyDown(Keys.M) && !previousKBState.IsKeyDown(Keys.M))
+                    {
+                        this.IsMouseVisible = true;
+                        this.ToDraw.Clear();
+                        this.menu = new Menu(this);
+                        menu.LoadContent(Content);
+                        this.GameState = Conf.GameState.MENU;
+                    }
                     break;
 
                 case Conf.GameState.PLAY:

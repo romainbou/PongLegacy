@@ -18,6 +18,7 @@ namespace PongLegacy
             this.game = game;
 
             startSprites.Add(new SpriteText(new Vector2(200,160), Color.White, Conf.PAUSE_NAME));
+            startSprites.Add(new SpriteText(new Vector2(150, Conf.WINDOW_HEIGHT - 60), Color.White, Conf.PAUSE_INSTRUCTIONS));
         }
 
         public void initialize()
