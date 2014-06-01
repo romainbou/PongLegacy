@@ -244,6 +244,9 @@ namespace PongLegacy
             base.Draw(gameTime);
         }
 
+        /// <summary>
+        /// Precedure pour lancer la phase de jeu
+        /// </summary>
         public void startGame()
         {
             this.ToDraw.Clear();

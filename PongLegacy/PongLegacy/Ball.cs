@@ -65,6 +65,10 @@ namespace PongLegacy
             }
         }
 
+
+        /// <summary>
+        /// Indique si la balle est sortie de la zone.
+        /// </summary>
         public Boolean IsOut()
         {
             //Si la balle est sortie du côté gauche
@@ -131,6 +135,8 @@ namespace PongLegacy
             
             return false;
         }
+
+        // Vérification des collisions sur un mur
         public Boolean CheckWallColision()
         {
             if (this.position.Y <= 0 && !this.IsInWall || this.position.Y >= this.Pong.Dimensions.Y - Ball.Radius && !this.IsInWall)

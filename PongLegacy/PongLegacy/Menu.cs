@@ -28,13 +28,13 @@ namespace PongLegacy
             rightChoices = new List<Button>();
             menuSprites = new List<Sprite>();
 
+            // Position des boutons en fonction de la taille de la fenêtre
             int leftButtonsPositionX = (Conf.WINDOW_WIDTH/2 - Conf.BUTTON_WIDTH)/2;
-            //leftButtonsPositionX += leftButtonsPositionX/2
             int rightButtonsPositionX = (Conf.WINDOW_WIDTH / 2) + leftButtonsPositionX;
             
             Vector2 leftButtonsPosition = new Vector2(leftButtonsPositionX, 200);
 
-
+            // Création des boutons et ajout dans les listes adaptées
             buttons.Add(new Button(leftButtonsPosition, "1 player", 1, Conf.InteligenceType.HUMAN));
             leftChoices.Add(buttons.Last());
             buttons.Add(new Button(new Vector2(leftButtonsPositionX, 300), "2 players", 2, Conf.InteligenceType.HUMAN));
@@ -50,6 +50,7 @@ namespace PongLegacy
 
             buttons.Add(new Button(new Vector2(375, 500), "GO !"));
 
+            // Ajout des boutons dans la liste des sprites à dessier
             foreach (Button button in buttons)
             {
                 menuSprites.Add(button);
@@ -69,9 +70,10 @@ namespace PongLegacy
             
         }
 
-        //Chargement des Sprites du menu à la volée
+        //Chargement des Sprites du menu.
         public void LoadContent(ContentManager content)
         {
+            // Chargement de tous les sprites du menu sont possédant une méthode LoadContent
             this.title.LoadContent(content, "ponglegacy");
             foreach (Sprite sprite in menuSprites)
             {
@@ -100,7 +102,10 @@ namespace PongLegacy
             }
         }
 
-        //Vérification des contrôles de la souris par rapport à l'état de celle-ci
+        /// <summary>
+        /// Vérification des contrôles de la souris par rapport à la position de celle-ci
+        /// Changement des états de boutons ce qui changement leurs aparence.
+        /// </summary>
         public void handleMouse(MouseState currentState)
         {
             foreach (Button currentButton in this.buttons)
@@ -125,10 +130,14 @@ namespace PongLegacy
             }
         }
 
-        // Au clique, passage du bouton en HOVER, ou DEFAULT
+        /// <summary>
+        /// Actions lors du clique sur la souris
+        /// </summary>
         public void onClick()
         {
             Button hoveredButton = null;
+
+            // Récupération du boutons survolé s'il y en a un.
             foreach (Button currentButton in this.buttons)
             {
                 if (currentButton.state == Button.ButtonState.HOVER)
@@ -141,11 +150,14 @@ namespace PongLegacy
             // Hovered button == GO && buttons are selected
             if (hoveredButton != null)
             {
+                // Si le bouton survolé est GO est que les conditions sont validés, lancer le jeu
                 if (hoveredButton == buttons.Last() && areChoicesMade())
                 {
                     initializeGame();
                     game.startGame();
                 }
+
+                // Si le bouton fait partie du groupe de gauche
                 if (leftChoices.Contains(hoveredButton))
                 {
                     foreach (Button currentSideButton in leftChoices)
@@ -156,6 +168,8 @@ namespace PongLegacy
                         }
                     }
                 }
+
+                // Si le bouton fait partie du groupe de droite
                 if (rightChoices.Contains(hoveredButton))
                 {
                     foreach (Button currentSideButton in rightChoices)
@@ -169,6 +183,8 @@ namespace PongLegacy
                 hoveredButton.setState(Button.ButtonState.SELECTED);
             }
         }
+
+        // Vérifie dans une liste de bouton si au moins 1 est selectionné
         public bool isOneChoiceSelected(List<Button> buttonList){
             foreach (Button currentButton in buttonList){
                 if(currentButton.state == Button.ButtonState.SELECTED){
@@ -178,6 +194,7 @@ namespace PongLegacy
             return false;
         }
 
+        // Vérifie que qu'au moins un choix est fait des deux côtés
         public bool areChoicesMade()
         {
             if (isOneChoiceSelected(leftChoices) && isOneChoiceSelected(rightChoices))
@@ -187,7 +204,7 @@ namespace PongLegacy
             return false;
         }
 
-        //Initialisation du jeu suite au choix effectué dans le menu pour instancié les équipes et joueurs à créer
+        //Initialisation du jeu suite au choix effectué dans le menu pour instancier les équipes et joueurs à créer
         public void initializeGame(){
             game.IsMouseVisible = false;
             Team teamLeft = null;
